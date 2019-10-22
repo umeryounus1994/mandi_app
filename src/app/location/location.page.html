@@ -1,0 +1,132 @@
+<ion-content>
+  <div class="main">
+    <div class="header">
+      <div class="container">
+        <div class="top-bar">
+          <div class="left">
+            <div class="back">
+              <ion-back-button class="light-icon-button" text="" icon="arrow-round-back"></ion-back-button>
+            </div>
+          </div>
+          <div class="right">
+            <div class="icon service">
+              <ion-icon *ngIf="allServices.length > 0 && showButton" class="light-icon-button" (click)="presentServices()" name="settings"></ion-icon>
+            </div>
+            <div class="icon cart">
+              <ion-icon (click)="navigateCart(barId)" class="light-icon-button" name="cart"></ion-icon>
+              <!-- Number of menu items added, show only if at least one menu item is added-->
+              <ion-badge name="items" *ngIf="flagbadge" color="danger">{{items}}</ion-badge>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Image gallery of the location -->
+    <div class="gallery">
+      <ion-slides pager="true" *ngIf="!noImage">
+        <ion-slide *ngFor="let b of barImages">
+          <div [ngStyle]="{'background-image': 'linear-gradient(to bottom, rgba(17, 19, 22, 0) 0%, rgba(17, 19, 22, 1) 100%),url(' + b.imagePath + ')','width':'100%','height':'300px','background-size': 'cover'}"></div>
+        </ion-slide>
+      </ion-slides>
+      <ion-slides pager="true" *ngIf="noImage">
+          <ion-slide>
+            <div [ngStyle]="{'background-image': 'linear-gradient(to bottom, rgba(17, 19, 22, 0) 0%, rgba(17, 19, 22, 1) 100%),url(' + specificBar[0].barImage + ')','width':'100%','height':'300px','background-size': 'cover'}"></div>
+          </ion-slide>
+        </ion-slides>
+    </div>
+
+    <div class="content">
+      <div class="title">
+        <div class="container">
+          <!-- Name of the lounge -->
+          <h2>{{barName}}</h2>
+        </div>
+      </div>
+
+      <!-- General contact information -->
+      <div class="contact-details">
+        <div class="container">
+          <!-- Redirects to Google Maps with the adress -->
+          <ion-icon class="white-icon-button" (click)="OpenMap()" name="pin"></ion-icon>
+          <!-- Redirects to call -->
+          <ion-icon class="white-icon-button" (click)="MakeCall()" name="call"></ion-icon>
+          <!-- Redirect to wifi, show only if WiFi data is input -->
+          <ion-icon class="white-icon-button" *ngIf="wifibutton" (click)="connectWifi()" name="wifi"></ion-icon>
+        </div>
+      </div>
+
+      <!-- Opening times slider -->
+      <div class="opening-times">
+        <div class="container">
+          <p class="p-title">{{ 'BARPROFILE.titleTimings' | translate }}</p>
+        </div>
+        <div class="times-slider">
+          <!-- Current day should always get the class "active" -->
+          <div class="time" [class.active]="currentday == 'Monday'">
+            <!-- The days are always default, dont add anything dynamic -->
+            <p>{{ 'BARPROFILE.monday' | translate }}</p>
+            <!-- The time needs to be changed dynamically. Let "Uhr" default-->
+            <!-- Exception: If the bar owner didn't input any time it should always say "Geschlossen" -->
+            <p *ngIf="oh1 != ''">{{oh1}} {{ 'BARPROFILE.clock' | translate }}</p>
+            <p *ngIf="oh1 == ''">{{ 'BARPROFILE.closed' | translate }}</p>
+          </div>
+          <div class="time" [class.active]="currentday == 'Tuesday'">
+            <p>{{ 'BARPROFILE.tuesday' | translate }}</p>
+            <p *ngIf="oh2 != ''">{{oh2}} {{ 'BARPROFILE.clock' | translate }}</p>
+            <p *ngIf="oh2 == ''">{{ 'BARPROFILE.closed' | translate }}</p>
+          </div>
+          <div class="time" [class.active]="currentday == 'Wednesday'">
+            <p>{{ 'BARPROFILE.wednesday' | translate }}</p>
+            <p *ngIf="oh3 != ''">{{oh3}} {{ 'BARPROFILE.clock' | translate }}</p>
+            <p *ngIf="oh3 == ''">{{ 'BARPROFILE.closed' | translate }}</p>
+          </div>
+          <div class="time" [class.active]="currentday == 'Thursday'">
+            <p>{{ 'BARPROFILE.thursday' | translate }}</p>
+            <p *ngIf="oh4 != ''">{{oh4}} {{ 'BARPROFILE.clock' | translate }}</p>
+            <p *ngIf="oh4 == ''">{{ 'BARPROFILE.closed' | translate }}</p>
+          </div>
+          <div class="time" [class.active]="currentday == 'Friday'">
+            <p>{{ 'BARPROFILE.friday' | translate }}</p>
+            <p *ngIf="oh5 != ''">{{oh5}} {{ 'BARPROFILE.clock' | translate }}</p>
+            <p *ngIf="oh5 == ''">{{ 'BARPROFILE.closed' | translate }}</p>
+          </div>
+          <div class="time" [class.active]="currentday == 'Saturday'">
+            <p>{{ 'BARPROFILE.saturday' | translate }}</p>
+            <p *ngIf="oh6 != ''">{{oh6}} {{ 'BARPROFILE.clock' | translate }}</p>
+            <p *ngIf="oh6 == ''">{{ 'BARPROFILE.closed' | translate }}</p>
+          </div>
+          <div class="time" [class.active]="currentday == 'Sunday'">
+            <p>{{ 'BARPROFILE.sunday' | translate }}</p>
+            <p *ngIf="oh7 != ''">{{oh7}} {{ 'BARPROFILE.clock' | translate }}</p>
+            <p *ngIf="oh7 == ''">{{ 'BARPROFILE.closed' | translate }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Menu cards -->
+      <div class="menucards">
+        <div class="container">
+          <p class="p-title">{{ 'MENUCARDS.menucards' | translate }}</p>
+          <!-- Exception: if the bars didn't add any menu items yet. By default no cards are shown until the a card has the first menu item added. -->
+          <p *ngIf="!shishaCard && !drinksCard && !foodCard" style="margin-top: -12px;">{{ 'MENUCARDS.nocards' | translate }}</p>
+
+          <!-- Redirect to shishaCard -->
+          <div class="shisha-card" *ngIf="shishaCard" (click)="navigateShishaCard()">
+            <h3>{{ 'MENUCARDS.shisha' | translate }}</h3>
+          </div>
+
+          <!-- Redirect to drinksCard-->
+          <div class="drinks-card" *ngIf="drinksCard" (click)="navigateDrinksCard()">
+            <h3>{{ 'MENUCARDS.drinks' | translate }}</h3>
+          </div>
+
+          <!-- Redirect to snacksCard-->
+          <div class="snacks-card" *ngIf="foodCard" (click)="navigateFoodsCard()">
+            <h3>{{ 'MENUCARDS.snacks' | translate }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,76 @@
+// GENERAL VARIABLES
+$spacing: 16px;
+$highlighter: #1D8CFC;
+$border-rounded: 50px;
+
+.gallery { height: 300px; }
+
+.main { margin: 0 0 40px; }
+
+.content {
+  margin-top: -40px;
+  position: relative;
+  z-index: 9;
+
+  .title { 
+    margin-top: 0; 
+
+    h2 { margin: 0; }
+  }
+
+  .contact-details {
+    ion-icon { margin-right: $spacing; }
+  }
+
+  .opening-times {
+    overflow-y: auto !important;
+    .p-title { margin-bottom: 4px; }
+
+    .times-slider {
+      overflow-x: auto;
+      width: 100%;
+      white-space: nowrap;
+      padding: 0 5.0974512%;
+
+      .time {
+        width: 120px;
+        display: inline-block;
+        margin-right: $spacing;
+
+        &:last-child { margin-right: 0; }
+
+        p { font-size: 14px; }
+      }
+
+      .active { 
+        p { color: white; } 
+      }
+    }
+  }
+
+  .menucards {
+    .p-title { margin-bottom: 12px; }
+
+    h3 {margin: 0;}
+
+    .shisha-card {
+      margin-bottom: $spacing;
+      padding: 72px $spacing $spacing;
+      background: url('../../assets/images/geschmacker.jpg') no-repeat center center;
+      background-size: cover;
+    }
+
+    .drinks-card {
+      margin-bottom: $spacing;
+      padding: 72px $spacing $spacing;
+      background: url('../../assets/images/getranke.jpg') no-repeat center center;
+      background-size: cover;
+    }
+
+    .foods-card {
+      padding: 72px $spacing $spacing;
+      background: url('../../assets/images/speisen.jpg') no-repeat center center;
+      background-size: cover;
+    }
+  }
+}

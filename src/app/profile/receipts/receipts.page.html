@@ -1,0 +1,40 @@
+<ion-content>
+  <div class="main">
+    <div class="header">
+      <div class="back">
+        <div class="container">
+          <ion-back-button class="light-icon-button" text="" icon="arrow-round-back"></ion-back-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="content"> 
+      <div class="main-items">
+        <div class="container">
+          <div class="title">
+            <h2>{{ 'RECEIPTS.title' | translate }}</h2>
+          </div>
+
+          <div class="receipts list-items">
+            <div class="receipt item" (click)="navigateReceipt()">
+              <div class="left">
+                <!-- Company name -->
+                <h3>ZYX</h3>
+                <!-- Order Date - OPEN RECEIPT or PAID RECEIPT -->
+                <p>01.01.19 - <span>{{ 'RECEIPTS.notPaid' | translate }}</span><span>{{ 'RECEIPTS.paid' | translate }}</span> </p>
+              </div>
+              <div class="right">
+                <!-- Total amount -->
+                <div class="price">
+                  <p class="p-title">100,00€</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

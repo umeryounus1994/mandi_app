@@ -1,0 +1,28 @@
+.main { margin: 0 0 40px; }
+
+.content {
+  margin-top: -40px;
+  position: relative;
+  z-index: 9;
+
+  .title { 
+    margin-top: 0; 
+
+    h2 { margin: 0; }
+  }
+
+  h2 { margin: 22px 0 12px 0;}
+}
+
+ion-select {
+  --icon-color: white;
+  color: white;
+}
+
+ion-select {
+  max-width: fit-content;
+    padding: 0px;
+    padding-right: 3px; 
+}
+
+.disabled { opacity: 0.6; }

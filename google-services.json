@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "526074675943",
+    "firebase_url": "https://smartout-741a5.firebaseio.com",
+    "project_id": "smartout-741a5",
+    "storage_bucket": "smartout-741a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526074675943:android:01c2ea46b69ad8e3",
+        "android_client_info": {
+          "package_name": "com.smartout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "526074675943-ehfag9k9p24a3ucahn7ho9gft3sds1jn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbHBA1FQ4NnO2N3eBgDCtU58waJTRzMgk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

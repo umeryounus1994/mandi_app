@@ -1,0 +1,94 @@
+<ion-content>
+  <div class="main">
+    <div class="header">
+      <div class="back">
+        <div class="container">
+          <ion-back-button class="light-icon-button" text="" icon="arrow-round-back"></ion-back-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="content"> 
+      <div class="main-items">
+        <div class="container">
+          <div class="title">
+            <!-- RECEIPT - ID -->
+            <h2>{{ 'RECEIPTS.RECEIPT.title' | translate }} - #10000</h2>
+          </div>
+
+          <div class="order">
+            <!-- If there are any menu items from SHISHA added, this one should show up -->
+            <div class="shisha-items">
+              <h3>{{ 'MENUCARDS.shisha' | translate }}</h3>
+            
+              <div class="list-items">
+                <div class="item">
+                  <div class="left">
+                    <!-- Name of the product, format will be: Category Name (+ Menu Item) -->
+                    <p class="p-title">Text</p>
+                    
+                    <!-- Product amount -->
+                    <p>10x</p>
+                  </div>
+                  <div class="right">
+                    <!-- Price -->
+                    <p class="p-title"><span class="sPrice">100,00</span> €</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <!-- If there are any menu items from DRINKS added, this one should show up -->
+            <div class="drinks-items">
+              <h3>{{ 'MENUCARDS.drinks' | translate }}</h3>
+            
+              <div class="list-items">
+                <div class="item">
+                  <div class="left">
+                    <!-- Name of the product, format will be: Menu Item -->
+                    <p class="p-title">Text</p>
+                    
+                    <!-- Product amount -->
+                    <p>10x</p>
+                  </div>
+                  <div class="right">
+                    <!-- Price -->
+                    <p class="p-title"><span class="sPrice">100,00</span> €</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- If there are any menu items from SNACKS added, this one should show up -->
+            <div class="snacks-items">
+              <h3>{{ 'MENUCARDS.snacks' | translate }}</h3>
+            
+              <div class="list-items">
+                <div class="item">
+                  <div class="left">
+                    <!-- Name of the product, format will be: Menu Item -->
+                    <p class="p-title">Text</p>
+                    
+                    <!-- Product amount -->
+                    <p>10x</p>
+                  </div>
+                  <div class="right">
+                    <!-- Price -->
+                    <p class="p-title"><span class="sPrice">100,00</span> €</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Total amount -->
+            <div class="total-amount">
+              <h2>{{ 'RECEIPTS.totalamount' | translate }}<br><span class="total">150,00</span> €</h2>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

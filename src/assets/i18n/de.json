@@ -1,0 +1,136 @@
+{
+  "GENERAL": {
+    "cancel": "Abbrechen",
+    "done": "Fertig",
+    "update": "Jetzt aktualisieren",
+    "logout": "Jetzt ausloggen",
+    "login": "Jetzt einloggen",
+    "titleLogin": "Login",
+    "subtitleLogin": "Willkommen zurück!\nTrage deine E-Mail und dein Passwort ein, um fortzufahren.",
+    "titleRegister": "Kostenlos Registrieren",
+    "lawTextRegister1": "Mit deiner Registrierung erklärst du dich mit unseren",
+    "lawTextRegister2": "einverstanden",
+    "privacyPolicy": "Datenschutzerklärung",
+    "termsOfUse": "Nutzungsbedingungen",
+    "passwordReset": "Jetzt zurücksetzen",
+    "titlePasswordReset": "Passwort vergessen?",
+    "subtitlePasswordReset": "Du hast dein Passwort vergessen? Kein Problem! Trage ganz einfach deine E-Mail ein und klicke auf den Button, um fortzufahren.",
+    "register": "Jetzt registrieren",
+    "continue": "Ohne Account fortfahren",
+    "firstname": "Vorname",
+    "lastname": "Nachname",
+    "gender": "Geschlecht",
+    "male": "Männlich",
+    "female": "Weiblich",
+    "birthday": "Geburtsdatum",
+    "password": "Passwort",
+    "language": "Sprache"
+  },
+  "ALERT": {
+    "internetMessage": "Es wurde keine Internetverbindung erkannt. Smartout versucht automatisch, sich wieder zu verbinden, wenn es eine Internetverbindung erkennt.",
+    "permissionLocationHeader": "GPS",
+    "permissionLocationMessage": "Bitte aktiviere dein GPS, um alle Funktionen der App nutzen zu können. Starte die App neu, damit die Änderung wirksam wird.",
+    "notLoggedInMessage": "Um diese Option nutzen zu können benötigst du einen Smartout-Account.",
+    "successUpdateMessage": "Erfolgreich angepasst.",
+    "failUpdateMessage": "Deine Anpassung konnte leider nicht geändert werden. Probiere es erneut und prüfe, ob du eine bestehende Internetverbindung hast.",
+    "failInputHeader": "Fehlende Informationen",
+    "failInputMessage": "Bitte füll alle Felder aus.",
+    "welcomeHeader": "Willkommen bei Smartout!",
+    "welcomeMessage": "Deine Registrierung war erfolgreich und du kannst dich nun anmelden.",
+    "blockHeader": "Dein Account wurde blockiert.",
+    "blockMessage": "Bitte kontaktiere uns mit deiner Accountmail, um dieses Problem zu lösen.",
+    "successPasswordReset": "Du hast erfolgreich eine Mail erhalten! Überprüfe dein Postfach, um dein Passwort zurückzusetzen.",
+    "failPasswordReset": "Leider konnten wir dein Passwort nicht zurücksetzen. Probiere es nochmal aus oder kontaktiere und direkt.",
+    "addFavoriteMessage": "Erfolgreich zu deinen Favoriten hinzugefügt.",
+    "deleteFavoriteMessage": "Erfolgreich aus deinen Favoriten gelöscht.",
+    "noWifiMessage": "Leider konnten wir keine WLAN-Verbindung herstellen. Bitte probiere es erneut.",
+    "freeServicesHeader": "Was möchtest du tun?",
+    "permissionNFCHeader": "NFC deaktiviert",
+    "permissionNFCMessage": "Bitte aktiviere NFC, um mit dem Bestellprozess fortzufahren.",
+    "wrongScan": "Der eingescannte Sticker entspricht nicht der Bar in der du dich aktuell befindest.",
+    "noNFCSupport": "Leider unterstützt dein Gerät die Bestellfunktion nicht.",
+    "addToCartMessage": "Erfolgreich in den Warenkorb hinzugefügt.",
+    "maxOrderAmountMessage": "Leider kannst du dieses Produkt nicht häufiger bestellen.",
+    "outOfStock": "Leider ist dieses Produkt momentan nicht auf Lager."
+  },
+  "START": {
+    "title": "Smartout",
+    "slogan": "Nie wieder auf den Kellner warten!"
+  },
+  "HOME": { 
+    "title": "In deiner Nähe", 
+    "city": "in {{city_value}}", 
+    "distance": "{{distance_value}}km entfernt von dir", 
+    "searchnow": "Jetzt suchen"
+  },
+  "SEARCH": {
+    "title": "Suchergebnisse",
+    "nolocation": "Leider konnte nichts unter der angegebenen Suchanfrage gefunden werden.",
+    "nomessage": "Um die Suche zu starten, tippe den Namen einer Stadt oder Bar in die Suchleiste ein.",
+    "searchinput": "Stadt oder Name"
+  },
+  "USERPROFILE": {
+    "title": "Dein Account",
+    "favorites": "Favoriten",
+    "receipts": "Quittungen",
+    "settings": "Einstellungen",
+    "titlelegalmore": "Rechtliches & mehr",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz",
+    "termsofuse": "Nutzungsbedingungen",
+    "contact": "Probleme? Jetzt kontaktieren!"
+  },
+  "SETTINGS": {
+    "title": "Accountdetails"
+  },
+  "RECEIPTS": {
+    "title": "Quittungen",
+    "notPaid": "Offen",
+    "paid": "Bezahlt",
+    "totalamount": "Rechnungsbetrag",
+    "RECEIPT": {
+      "title": "Quittung"
+    }
+  },
+  "FAVORITES": {
+    "title": "Favoriten"
+  },
+  "BARPROFILE": {
+    "title": "",
+    "titleTimings": "Öffnungszeiten",
+    "clock": "Uhr",
+    "monday": "Montag",
+    "tuesday": "Dienstag",
+    "wednesday": "Mittwoch",
+    "thursday": "Donnerstag",
+    "friday": "Freitag",
+    "saturday": "Samstag",
+    "sunday": "Sonntag",
+    "closed": "Geschlossen"
+  },
+  "MENUCARDS": {
+    "menucards": "Menükarten",
+    "shisha": "Geschmäcker",
+    "drinks": "Getränke",
+    "snacks": "Snacks",
+    "nocards": "Leider wurden noch keine Menükarten hinzugefügt.",
+    "info": "Alle Preise sind ohne Gewähr und inkl. MwSt. Informationen über Allergene & Zusatzstoffe erhältst du auf Nachfrage bei den Servicemitarbeitern der Bar. Alle Angaben unter Vorbehalt."
+  },
+  "CART": {
+    "title": "Bestellübersicht",
+    "emptyCart": "Dein Warenkorb ist leer.",
+    "notes": "Anmerkungen",
+    "totalAmount": "Rechnungsbetrag",
+    "orderNow": "Jetzt kostenpflichtig bestellen"
+  },
+  "CONNECT": {
+    "title": "Starte den Scanner und halte dein Smartphone auf den Sticker",
+    "startScanner": "Jetzt Scanner starten"
+  },
+  "CONFIRMATION": {
+    "title": "Bestellung erfolgreich",
+    "subtitle": "Deine Bestellung war erfolgreich und wird nun verarbeitet!",
+    "backHome": "Zurück zur Startseite"
+  }
+  
+}

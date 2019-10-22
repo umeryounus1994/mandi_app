@@ -1,0 +1,18 @@
+<ion-content>
+  <div class="main">
+    <div class="login">
+      <div class="container">
+        <div class="title">
+          <h1>House of Mandi</h1>
+          <h2>{{ 'START.slogan' | translate }}</h2>
+        </div>
+        <!-- Redirect to register -->
+        <ion-button color="primary" expand="block" (click)="navigateRegister()">{{ 'GENERAL.register' | translate }}</ion-button>
+        <ion-button color="white" expand="block" (click)="navigateLogin()">{{ 'GENERAL.login' | translate }}</ion-button>
+        <!-- Redirect to login / Redirect to home as guest -->
+        <p (click)="navigateHome()">{{ 'GENERAL.continue' | translate }}</p>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

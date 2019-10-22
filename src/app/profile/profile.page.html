@@ -1,0 +1,75 @@
+<ion-content>
+    <div class="main">
+      <div class="back">
+        <div class="container">
+          <ion-back-button class="light-icon-button" text="" icon="arrow-round-back"></ion-back-button>
+        </div>
+      </div>
+  
+      <div class="content">
+        <div class="container">
+          <div class="title">
+            <h1>{{ 'USERPROFILE.title' | translate }}</h1>
+          </div>
+          <div class="account-options">
+            <!-- Redirection to receipts  -->
+            <div class="white-text-icon-button" (click)="navigateReceipts()"> 
+              <ion-icon name="cart"></ion-icon><p>{{ 'USERPROFILE.receipts' | translate }}</p>
+            </div>
+            <!-- Redirection to account details-->
+            <div class="white-text-icon-button" (click)="navigateSettings()">
+              <ion-icon name="settings"></ion-icon><p>{{ 'USERPROFILE.settings' | translate }}</p>
+            </div>
+          </div>
+
+          <div class="law">
+            <div class="title">
+              <p class="p-title">{{ 'USERPROFILE.titlelegalmore' | translate }}</p>
+            </div>
+            <div class="law-options">
+              <!-- Redirect to: https://smartout.de/impressum -->
+              <div class="button button-primary-tint" (click)="impressum()">
+                <p>{{ 'USERPROFILE.imprint' | translate }}</p>
+              </div>
+              <!-- Redirect to: https://smartout.de/datenschutz -->
+              <div class="button button-primary-tint" (click)="datenschutz()">
+                <p>{{ 'USERPROFILE.privacy' | translate }}</p>
+              </div>
+              <!-- Redirect to: https://smartout.de/nutzungsbedingungen -->
+              <div class="button button-primary-tint" (click)="nutzungsbedingungen()">
+                <p>{{ 'USERPROFILE.termsofuse' | translate }}</p>
+              </div>
+              <!-- Redirect to: info@smartout.de-->
+              <div class="button button-primary-tint" (click)="sendMail()">
+                <p>{{ 'USERPROFILE.contact' | translate }}</p>
+              </div>
+  
+              <div class="form">
+                <div class="form-group">
+                  <ion-select [(ngModel)]="language" (ionChange)="changeLanguage()" cancelText="{{ 'GENERAL.cancel' | translate }}" okText="{{ 'GENERAL.done' | translate }}" placeholder="{{ 'GENERAL.language' | translate }}">
+                    <ion-select-option value="en" selected>English</ion-select-option>
+                    <ion-select-option value="de">Deutsch</ion-select-option>
+                  </ion-select>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          
+          <!-- Show that one if someone is logged in -->
+          <div class="logedin" *ngIf="type == 'login'">
+            <!-- Log out function -->
+            <ion-button color="primary" expand="block" (click)="navigateStart()">{{ 'GENERAL.logout' | translate }}</ion-button>
+          </div>
+  
+          <!-- Show that one if someone is not logged in -->
+          <div class="login" *ngIf="type == 'guest'">
+            <!-- Redirect to register -->
+            <ion-button color="primary" expand="block" (click)="navigateRegister()">{{ 'GENERAL.register' | translate }}</ion-button>
+            <!-- Redirect to login -->
+            <p (click)="navigateLogin()">{{ 'GENERAL.login' | translate }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>

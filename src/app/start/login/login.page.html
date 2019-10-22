@@ -1,0 +1,35 @@
+<ion-content>
+  <div class="main">
+    <div class="container">
+      <div class="header">
+        <div class="back">
+          <ion-back-button class="light-icon-button" text="" icon="arrow-round-back"></ion-back-button>
+        </div>
+      </div>
+      
+      <div class="content">
+        <div class="title">
+          <h1>{{ 'GENERAL.titleLogin' | translate }}</h1>
+          <p>{{ 'GENERAL.subtitleLogin' | translate }}</p>
+        </div>
+
+        <ion-list class="form">
+          <ion-item lines="none">
+            <ion-input class="input" [(ngModel)]="register_data.email" name="email" type="email" placeholder="Email"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input class="input" type="password"  [(ngModel)]="register_data.password" name="password" placeholder="{{ 'GENERAL.password' | translate }}"></ion-input>
+          </ion-item>
+        </ion-list>
+    
+        <div class="login">
+          <!-- Login -->
+          <ion-button color="primary" expand="block" (click)="Login()">{{ 'GENERAL.login' | translate }}</ion-button>
+          <!-- Redirect to password reset -->
+          <p (click)="navigatePasswordReset()">{{ 'GENERAL.titlePasswordReset' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+  

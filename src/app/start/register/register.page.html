@@ -1,0 +1,48 @@
+<ion-content>
+  <div class="main">
+    <div class="container">
+      <div class="header">
+        <div class="back">
+          <ion-back-button class="light-icon-button" text="" icon="arrow-round-back"></ion-back-button>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="title">
+          <h1>{{ 'GENERAL.titleRegister' | translate }}</h1>
+          <p>{{ 'GENERAL.lawTextRegister1' | translate }} <a href='javascript:;;' (click)='datenschutz()'>{{ 'GENERAL.privacyPolicy' | translate }}</a> / <a href='javascript:;' (click)='nutzungsbedingungen()'>{{ 'GENERAL.termsOfUse' | translate }}</a> {{ 'GENERAL.lawTextRegister2' | translate }}</p>
+        </div>
+        
+        <ion-list class="form">
+          <ion-item lines="none">
+            <ion-input class="input" [(ngModel)]="register_data.firstname" name="firstname" type="text" autocapitalize="word" placeholder="{{ 'GENERAL.firstname' | translate }}"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input class="input" [(ngModel)]="register_data.lastname" name="lastname" type="text" autocapitalize="word" placeholder="{{ 'GENERAL.lastname' | translate }}"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-select cancelText="{{ 'GENERAL.cancel' | translate }}" okText="{{ 'GENERAL.done' | translate }}" placeholder="{{ 'GENERAL.gender' | translate }}" [(ngModel)]="register_data.gender" name="gender" class="input">
+              <ion-select-option value="male">{{ 'GENERAL.male' | translate }}</ion-select-option>
+              <ion-select-option value="female">{{ 'GENERAL.female' | translate }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item lines="none" [ngStyle]="{'color': color }" (click)="changecolor()">
+            <ion-datetime cancelText="{{ 'GENERAL.cancel' | translate }}" doneText="{{ 'GENERAL.done' | translate }}" [(ngModel)]="register_data.dob" name="dob" class="input" placeholder="{{ 'GENERAL.birthday' | translate }}" displayFormat="DD.MM.YYYY"></ion-datetime>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input class="input" [(ngModel)]="register_data.email" name="email" type="email" placeholder="Email"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input class="input" type="password" [(ngModel)]="register_data.password" name="password" placeholder="{{ 'GENERAL.password' | translate }}"></ion-input>
+          </ion-item>
+        </ion-list>
+    
+        <div class="login">
+          <ion-button color="primary" expand="block" (click)="Register()">{{ 'GENERAL.register' | translate }}</ion-button>
+        </div>
+      
+      </div>
+    </div>
+    
+  </div>
+</ion-content>

@@ -1,0 +1,126 @@
+<ion-content>
+  <div class="main">
+    <div class="header">
+      <div class="back">
+        <div class="container">
+          <ion-back-button class="light-icon-button" text="" icon="arrow-round-back"></ion-back-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="title">
+        <div class="container">
+          <h1>{{ 'CART.title' | translate }}</h1>
+          <!-- If the cart is empty, the following one should show up -->
+          <p *ngIf="nobasket">{{ 'CART.emptyCart' | translate }}</p>
+        </div>
+      </div>
+
+      <!-- If there are any menu items from SHISHA added, this one should show up -->
+      <div class="geschmacker-items">
+        <div class="container">
+          <h3 *ngIf="shisha.length > 0">{{ 'MENUCARDS.shisha' | translate }}</h3>
+        
+          <div class="list-items">
+            <div class="item" *ngFor="let s of shisha;let i = index">
+              <div class="left">
+                <!-- Name of the product, format will be: Category Name (+ Menu Item) -->
+                <p class="p-title">{{s.categoryName}} ({{s.name}})</p>
+                <!-- Price of the category-->
+                <div class="price">
+                  <p class="sPrice">{{ s.price }} </p><p>€</p>
+                </div>
+              </div>
+              <div class="right">
+                <!-- Decrease by one -->
+                <ion-icon name="remove"></ion-icon>
+                <!-- Amount of product (max. 9 products) -->
+                <p class="p-title">9</p>
+                <!-- Increase by one -->
+                <ion-icon name="add"></ion-icon>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    <!-- If there are any menu items from DRINKS added, this one should show up -->
+      <div class="drinks-items">
+        <div class="container">
+          <h3 *ngIf="drinks.length > 0">{{ 'MENUCARDS.drinks' | translate }}</h3>
+        
+          <div class="list-items">
+            <div class="item" *ngFor="let d of drinks;let ab = index">
+              <div class="left">
+                <!-- Name of the product, format will be: Category Name (+ Menu Item) -->
+                <p class="p-title">{{d.name}}</p>
+                <!-- Price of the category-->
+                <div class="price">
+                  <p class="sPrice">{{ d.price }} </p><p>€</p>
+                </div>
+              </div>
+              <div class="right">
+                <!-- Decrease by one -->
+                <ion-icon name="remove"></ion-icon>
+                <!-- Amount of product (max. 9 products) -->
+                <p class="p-title">9</p>
+                <!-- Increase by one -->
+                <ion-icon name="add"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- If there are any menu items from SNACKS added, this one should show up -->
+      <div class="snacks-items">
+        <div class="container">
+          <h3 *ngIf="foods.length > 0">{{ 'MENUCARDS.snacks' | translate }}</h3>
+        
+          <div class="menu-items">
+            <div class="menu-item" *ngFor="let f of foods;let bc = index">
+              <div class="left">
+                <!-- Name of the product, format will be: Category Name (+ Menu Item) -->
+                <p class="p-title">{{f.name}}</p>
+                <!-- Price of the category-->
+                <div class="price">
+                  <p class="sPrice">{{ f.price }} </p><p>€</p>
+                </div>
+              </div>
+              <div class="right">
+                <!-- Decrease by one -->
+                <ion-icon name="remove"></ion-icon>
+                <!-- Amount of product (max. 9 products) -->
+                <p class="p-title">9</p>
+                <!-- Increase by one -->
+                <ion-icon name="add"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- user notes, show only if menu items are added to the cart -->
+      <div class="user-notes">
+        <div class="container">
+          <h3>{{ 'CART.notes' | translate }}</h3>
+          <ion-textarea (input)="comments($event.target.value)"></ion-textarea>
+        </div>
+      </div>
+
+      <!-- Total amount, should be also only visible if there is at least one menu item -->
+      <div class="total-amount">
+        <div class="container">
+          <h2 *ngIf="istPrice">{{ 'CART.totalAmount' | translate }}<br><span class="total">{{finalP}}</span> €</h2>
+          
+          <h2 *ngIf="secondPrice" name="totalPrice1">{{ 'CART.totalAmount' | translate }}<br><span class="total">{{totalPrice1}}</span> €</h2>
+
+          <!-- Redirect to payment page -->
+          <ion-button color="primary" expand="block" (click)="navigatePayment()">{{ 'CART.orderNow' | translate }}</ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

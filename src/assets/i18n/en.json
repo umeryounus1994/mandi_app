@@ -1,0 +1,137 @@
+{
+  "GENERAL": {
+    "cancel": "Cancel",
+    "done": "Done",
+    "update": "Update",
+    "logout": "Logout",
+    "login": "Login now",
+    "register": "Register now",
+    "titleLogin": "Login",
+    "subtitleLogin": "Welcome back! Enter your email and password, to continue.",
+    "titleRegister": "Register for free",
+    "lawTextRegister1": "With your registration you agree to our",
+    "lawTextRegister2": "",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "Terms of Use",
+    "passwordReset": "Reset now",
+    "titlePasswordReset": "Forgot your password?",
+    "subtitlePasswordReset": "You forgot your password? No problem! Just enter your e-mail and click on the button to continue.",
+    "continue": "Continue without account",
+    "firstname": "First name",
+    "lastname": "Last name",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "birthday": "Birthday",
+    "password": "Password",
+    "language": "Language"
+  },
+  "ALERT": {
+    "internetMessage": "No internet connection detected. House of Mandi will automatically try to reconnect when it detects an internet connection.",
+    "permissionLocationHeader": "GPS",
+    "permissionLocationMessage": "Please activate your GPS to use all functions of the app. Restart the app for the change to take effect.",
+    "notLoggedInMessage": "To use this option you need a House of Mandi account.",
+    "successUpdateMessage": "Successfully updated.",
+    "failUpdateMessage": "Unfortunately, your adjustment could not be changed. Try again and check if you have an existing internet connection.",
+    "failInputHeader": "Missing information",
+    "failInputMessage": "Please fill in all fields.",
+    "welcomeHeader": "Welcome to House of Mandi!",
+    "welcomeMessage": "Your registration was successful and you can now log in.",
+    "blockHeader": "Your account has been blocked.",
+    "blockMessage": "Please contact us with your account mail to solve this problem.",
+    "successPasswordReset": "You have successfully received a mail! Check your mailbox to reset your password.",
+    "failPasswordReset": "Unfortunately we could not reset your password. Try it again or contact us directly.",
+    "addFavoriteMessage": "Successfully added to your favorites.",
+    "deleteFavoriteMessage": "Successfully deleted from your favorites.",
+    "noWifiMessage": "Unfortunately we could not establish a wifi connection. Please try again.",
+    "freeServicesHeader": "What would you like to do?",
+    "permissionNFCHeader": "NFC deactivated",
+    "permissionNFCMessage": "Please activate NFC to proceed with the ordering process.",
+    "wrongScan": "The scanned sticker does not match the bar you are currently in.",
+    "noNFCSupport": "Unfortunately your device does not support the order function.",
+    "addToCartMessage": "Successfully added to shopping cart.",
+    "maxOrderAmountMessage": "Unfortunately you can't order this product more often.",
+    "outOfStock": "Unfortunately this product is currently out of stock."
+  },
+  "START": {
+    "title": "House of Mandi",
+    "slogan": "Never wait for the waiter again!"
+  },
+  "HOME": { 
+    "title": "Near to you", 
+    "city": "in {{city_value}}", 
+    "distance": "{{distance_value}}km away from you",
+    "searchnow": "Search now"
+  },
+  "SEARCH": {
+    "title": "Search results",
+    "nolocation": "Unfortunately nothing could be found under the given search query.",
+    "nomessage": "To start the search, type in a item name.",
+    "searchinput": "Item name"
+  },
+  "USERPROFILE": {
+    "title": "Your account",
+    "favorites": "Favorites",
+    "receipts": "Receipts",
+    "settings": "Settings",
+    "titlelegalmore": "Legal and more",
+    "imprint": "Imprint",
+    "privacy": "Privacy Policy",
+    "termsofuse": "Terms of Use",
+    "contact": "Any Problems? Contact us!",
+    "logout": "Logout"
+  },
+  "SETTINGS": {
+    "title": "Accountdetails"
+  },
+  "RECEIPTS": {
+    "title": "Receipts",
+    "notPaid": "Open",
+    "paid": "Paid",
+    "totalamount": "Total amount",
+    "RECEIPT": {
+      "title": "Receipt"
+    }
+  },
+  "FAVORITES": {
+    "title": "Favorites"
+  },
+  "BARPROFILE": {
+    "title": "",
+    "titleTimings": "Opening hours",
+    "clock": "",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "closed": "Closed"
+  },
+  "MENUCARDS": {
+    "menucards": "Menucards",
+    "shisha": "Tastes",
+    "drinks": "Drinks",
+    "snacks": "Snacks",
+    "nocards": "Unfortunately no menu cards have been added yet.",
+    "info": "All prices are without guarantee and include VAT. Information about allergens & additives is available on request from the service staff of the bar. All information is subject to change."
+  },
+  "CART": {
+    "title": "Cart",
+    "emptyCart": "Your cart is empty",
+    "notes": "Extra Notes",
+    "totalAmount": "Total amount",
+    "orderNow": "Order now"
+  },
+  "CONNECT": {
+    "title": "Start the scanner and hold your smartphone on the sticker",
+    "startScanner": "Start scanner now"
+  },
+  "CONFIRMATION": {
+    "title": "Order successful",
+    "subtitle": "Your order was successful and is now being processed!",
+    "backHome": "Back home"
+  }
+  
+}

@@ -1,0 +1,26 @@
+.account-options {
+  .white-text-icon-button {
+    margin-bottom: 12px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+.law {
+  margin: 20px 0;
+
+  .law-options {
+    .white-border-text-button {
+      margin-bottom: 12px;
+
+      &:nth-child(1) {
+        margin-top: 12px;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

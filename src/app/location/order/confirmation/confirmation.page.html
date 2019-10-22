@@ -1,0 +1,27 @@
+<ion-content>
+  <div class="main">
+    <div class="header">
+      <div class="back">
+        <div class="container">
+          <ion-icon class="light-icon-button" ios="ios-checkmark" md="md-checkmark" (click)="navigateToHome()"></ion-icon>
+        </div>
+      </div>
+    </div>
+    
+    <div class="content">
+      <div class="title">
+        <div class="container">
+          <h1>{{ 'CONFIRMATION.title' | translate }}</h1>
+          <p>{{ 'CONFIRMATION.subtitle' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="continue">
+        <div class="container">
+          <!-- Back to home -->
+          <ion-button color="primary" expand="block" (click)="navigateHome()">{{ 'CONFIRMATION.backHome' | translate }}</ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

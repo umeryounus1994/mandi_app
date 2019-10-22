@@ -1,0 +1,51 @@
+<ion-content>
+  <div class="main">
+    <div class="header">
+      <div class="back">
+        <div class="container">
+          <ion-back-button class="light-icon-button" text="" icon="arrow-round-back"></ion-back-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="title">
+        <div class="container">
+          <h1>{{ 'SETTINGS.title' | translate }}</h1>
+        </div>
+      </div>
+  
+        <div class="form">
+          <div class="container">
+            <!-- First name -->
+            <div class="form-group">
+              <ion-input class="input" [(ngModel)]="register_data.firstname" name="firstname" type="text" autocapitalize="word" placeholder="{{ 'GENERAL.firstname' | translate }}"></ion-input>
+            </div>
+            <!-- Last name -->
+            <div class="form-group">
+              <ion-input class="input" [(ngModel)]="register_data.lastname" name="lastname" type="text" autocapitalize="word" placeholder="{{ 'GENERAL.lastname' | translate }}"></ion-input>
+            </div>
+            <!-- Gender-->
+            <div class="form-group">
+              <ion-select cancelText="{{ 'GENERAL.cancel' | translate }}" okText="{{ 'GENERAL.done' | translate }}" placeholder="{{ 'GENERAL.gender' | translate }}" [(ngModel)]="register_data.gender" name="gender" class="input">
+                <ion-select-option value="male">{{ 'GENERAL.male' | translate }}</ion-select-option>
+                <ion-select-option value="female">{{ 'GENERAL.female' | translate }}</ion-select-option>
+              </ion-select>
+            </div>
+            <!-- Birthday -->
+            <div class="form-group" [ngStyle]="{'color': 'white' }">
+              <ion-datetime cancelText="{{ 'GENERAL.cancel' | translate }}" doneText="{{ 'GENERAL.done' | translate }}" [(ngModel)]="register_data.dob" name="dob" class="input" placeholder="{{ 'GENERAL.birthday' | translate }}" displayFormat="DD.MM.YYYY"></ion-datetime>
+            </div>
+          
+          </div>
+        </div>
+
+        <div class="login">
+          <div class="container">
+            <!-- If changes were successfull show the method "toastSuccessAlert()", if not show "toastFailAlert()"-->
+            <ion-button color="primary" expand="block" (click)="update()">{{ 'GENERAL.update' | translate }}</ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+</ion-content>

@@ -1,0 +1,41 @@
+<ion-header>
+  <div class="black-bg">
+    <div class="container">
+      <div class="grid-2">
+        <div class="grid-item">
+          <img src="../../assets/images/app_icon.png">
+          <p>{{ 'HOME.title' | translate }}</p>
+        </div> 
+        <div class="grid-item">
+          <!-- Redirect to userProfile -->
+          <ion-icon name="contact" (click)="navigateProfile()"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content>
+  <ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <!-- All nearby bars listed-->
+  <ion-list class="bars">
+    <ion-card class="bar" *ngFor="let b of categories" (click)="navigateLocation(b.barId)">
+      <!-- Single bar: Image is set from the bar gallery (always first image, as set by bar owner) -->
+      <ion-img [src]="b.image"></ion-img>
+      <ion-card-header>
+        <!-- Bar name -->
+        <ion-card-title>{{b.categoryName}}</ion-card-title>
+        <!-- Bar city and distance to the bar -->
+        <!-- <ion-card-subtitle>{{ 'HOME.city' | translate:{city_value: b.city} }}<br>{{ 'HOME.distance' | translate:{distance_value: b.dist} }}</ion-card-subtitle> -->
+      </ion-card-header>
+    </ion-card>
+  </ion-list>
+
+  <!-- Redirect to search, this part needs to be outside cause of iOS Bug -->
+  <div class="search">
+    <ion-button color="white" expand="block" (click)="navigateSearch()"><ion-icon slot="start" name="search"></ion-icon>{{ 'HOME.searchnow' | translate }}</ion-button>
+  </div>
+</ion-content>
