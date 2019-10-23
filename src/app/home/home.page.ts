@@ -123,36 +123,6 @@ export class HomePage implements OnInit {
       localStorage.removeItem("pg")
     }
     }
-    
-    setInterval(() => {
-      if(this.type == 'login') {
-        this.api.getBarFavourites(this.userId).pipe(map((actions: any) => {
-          return actions.map(a => {
-            const data = a.payload.doc.data()
-            const id = a.payload.doc.id;
-            return { id, ...data };
-          });
-        })).subscribe(data => {
-          if(data.length > 0) {
-            this.a++;
-          
-          data.map(item => {
-            let ref = this.afs.collection('userbars').doc(item.barId);
-            ref.get().subscribe(snapshot => {  //DocSnapshot
-                  if (snapshot.exists) {
-                      let post = snapshot.data()
-                      this.barName = post.barName;
-                      this.getNews(post.barId,this.barName);
-                  } else {
-                      // console.log("No such document!");
-                  }  
-            })   
-        }).forEach(item => this.other.push(item));
-        } else {
-        }
-        })
-      }
-    },100);
 }
   getBar(barName) {
     this.bName = barName
@@ -160,40 +130,6 @@ export class HomePage implements OnInit {
   i=0;
   b=0;
   
-  getNews(barId,barName) {
-    this.api.getBarNews(barId).pipe(map((actions: any) => {
-      return actions.map(a => {
-        const data = a.payload.doc.data()
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    })).subscribe(data1 => {
-      if(data1.length > 0) {
-        this.b++;
-
-     data1.map(item => {
-       if(item.status) {
-         if(item.status == "unread") {
-           this.unread = true;
-           localStorage.setItem('unreaded', 'true'); 
-         }
-       }
-       return {
-        barId : item.barId,
-        barName : barName,
-        desc : item.description,
-        image : item.imageFile,
-        date : item.createdDate,
-        time : item.createdTime,
-        newsTime : item.createdDate + " " + item.createdTime
-       }
-     }).forEach(item => {
-      this.allnews.push(item);
-      this.i++;
-     })
-    }
-    });
-  }
 
   async permissions(header, messsage) {
     const alert = await this.alertCtrl.create({
@@ -227,6 +163,9 @@ export class HomePage implements OnInit {
     })
   }
 
+  doRefresh(){
+    this.LoadNearByBars();
+  }
 
   async presentLoading() {
     const loading = await this.loadingCtrl.create({
@@ -251,12 +190,14 @@ export class HomePage implements OnInit {
     toast.present();
   }
 
-  navigateLocation(barId): void {
+  navigateMenu(category): void {
     //this.navCtrl.navigateForward('profile/' + barId);
-    this.router.navigate(['profile', barId]);
+    this.auth.saveCategory(category);
+    this.router.navigate(['search']);
   }
 
   navigateSearch(): void {
+    localStorage.removeItem('category');
     this.navCtrl.navigateForward('search');
   }
 

@@ -4,7 +4,7 @@
       <div class="grid-2">
         <div class="grid-item">
           <img src="../../assets/images/app_icon.png">
-          <p>{{ 'HOME.title' | translate }}</p>
+          <!-- <p>{{ 'HOME.title' | translate }}</p> -->
         </div> 
         <div class="grid-item">
           <!-- Redirect to userProfile -->
@@ -22,7 +22,7 @@
   
   <!-- All nearby bars listed-->
   <ion-list class="bars">
-    <ion-card class="bar" *ngFor="let b of categories" (click)="navigateLocation(b.barId)">
+    <ion-card class="bar" *ngFor="let b of categories" (click)="navigateMenu(b.categoryName)">
       <!-- Single bar: Image is set from the bar gallery (always first image, as set by bar owner) -->
       <ion-img [src]="b.image"></ion-img>
       <ion-card-header>
@@ -35,7 +35,7 @@
   </ion-list>
 
   <!-- Redirect to search, this part needs to be outside cause of iOS Bug -->
-  <div class="search">
+  <!-- <div class="search">
     <ion-button color="white" expand="block" (click)="navigateSearch()"><ion-icon slot="start" name="search"></ion-icon>{{ 'HOME.searchnow' | translate }}</ion-button>
-  </div>
+  </div> -->
 </ion-content>

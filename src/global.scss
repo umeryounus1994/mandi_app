@@ -55,10 +55,10 @@ h3 {
 
 p { 
   margin: 0 ;
-  font-size: 14px ; 
+  font-size: 17px ; 
   line-height: 1.25 ;
   font-weight: 500 ;
-  color: var(--ion-color-medium);
+  color: #fff;
 }
 
 a { 
@@ -437,7 +437,7 @@ ion-button {
         font-weight: 500;
         color: #fff;
         
-        &:last-child { color: var(--ion-color-medium); }
+        &:last-child { color: #fff; }
       }
     }
   }

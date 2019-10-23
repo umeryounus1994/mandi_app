@@ -5,31 +5,31 @@
         <div class="back">
           <ion-back-button class="light-icon-button" text="" icon="arrow-round-back"></ion-back-button>
         </div>
-        <!-- Search bar -->
-        <div class="search-bar">
+       
+        <!-- <div class="search-bar">
             <ion-searchbar [(ngModel)]="searchterm" (ionCancel)="onCancel($event)" (ionClear)="onClear($event)" (input)="search($event)" placeholder="{{ 'SEARCH.searchinput' | translate }}"></ion-searchbar>
-        </div>
+        </div> -->
       </div>
     </div>
     
     <div class="content">
       <div class="container">
         <div class="title">
-          <h1>{{ 'SEARCH.title' | translate }}</h1>
+          <!-- <h1>{{ 'SEARCH.title' | translate }}</h1> -->
           <!-- Exception if there are no search results -->
           <p *ngIf="nobars">{{ 'SEARCH.nolocation' | translate }}</p>
-          <p *ngIf="nomessage">{{ 'SEARCH.nomessage' | translate }}</p>
+          <p *ngIf="nomessage">{{ 'SEARCH.nomessage' | translate }} {{categoryName}}</p>
         </div>
         
         <!-- All results for a specific search -->
-        <ion-list class="bars-small" *ngIf="allbars.length > 0">
-          <ion-card class="bar" *ngFor="let b of allbars" (click)="navigateLocation(b.barId)">
-            <ion-img [src]="b.image"></ion-img>
+        <ion-list class="bars-small" *ngIf="menuItems.length > 0">
+          <ion-card class="bar" *ngFor="let b of menuItems" (click)="navigateLocation(b.itemId)">
+            <ion-img [src]="b.itemImage"></ion-img>
             <ion-card-content>
               <!-- Bar name -->
-              <p class="p-title">{{b.barName}}</p>
+              <p class="p-title">{{b.itemName}}</p>
               <!-- Bar city-->
-              <p>{{b.city}}</p>
+              <p>$ {{b.price}}</p>
             </ion-card-content>
           </ion-card>
         </ion-list>

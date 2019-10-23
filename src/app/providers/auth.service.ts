@@ -104,4 +104,11 @@ export class AuthService {
     }
     localStorage.setItem('timer',JSON.stringify(d));
   }
+
+  saveCategory(category){
+    let d = {
+      'category' : category
+    }
+    localStorage.setItem('category',JSON.stringify(d));
+  }
 }

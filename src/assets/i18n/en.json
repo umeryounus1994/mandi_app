@@ -66,8 +66,8 @@
   "SEARCH": {
     "title": "Search results",
     "nolocation": "Unfortunately nothing could be found under the given search query.",
-    "nomessage": "To start the search, type in a item name.",
-    "searchinput": "Item name"
+    "nomessage": "All Menu Items Related to",
+    "searchinput": "Item name first character"
   },
   "USERPROFILE": {
     "title": "Your account",

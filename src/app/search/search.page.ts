@@ -32,15 +32,36 @@ export class SearchPage implements OnInit {
   longitude;
   nobars = false;
   nomessage = true;
+  categoryName = '';
+  menuItems = [];
+  allMenuItems = [];
   constructor(private network1: Network, private router: Router, private navCtrl: NavController, private location: Location, private api : ApiService, private loadingCtrl : LoadingController,
     private afs : AngularFirestore, private platform: Platform,private network: NetworkService,private geolocation: Geolocation,
     private auth : AuthService, private alertCtrl : AlertController, private diagnostic : Diagnostic, private translate: TranslateService) {
-
+      if(localStorage.getItem('category') !== undefined || localStorage.getItem('category') !== null) {
+        this.categoryName = JSON.parse(localStorage.getItem('category')).category;
+        this.loadMenuItems(this.categoryName);
+      }
    }
 
   navigateLocation(barId): void {
     //this.navCtrl.navigateForward('profile');
     this.router.navigate(['location',barId]);
+  }
+  loadMenuItems(category){
+    this.afs.collection('menuitems',ref=>ref.where("page","==",category.toLowerCase())).snapshotChanges()
+    .pipe(map((actions: any) => {
+      return actions.map(a => {
+        const data = a.payload.doc.data()
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    })).subscribe(data => {
+      if(data.length > 0) {
+        this.menuItems = data;
+        this.allMenuItems = data;
+      }
+    });
   }
 
   async presentLoading() {
@@ -78,11 +99,9 @@ export class SearchPage implements OnInit {
   }
   orQuery(start,end){
 
-    const $two = this.afs.collection("userbars", ref => ref.limit(20).orderBy('barName').startAt(start).endAt(end)).valueChanges();
-    const $one = this.afs.collection('userbars', ref => ref.limit(20).orderBy('city').startAt(start).endAt(end)).valueChanges();
-
-    return combineLatest($one,$two).pipe(
-        map(([one, two]) => [...one, ...two])
+      const $one = this.afs.collection('menuitems', ref => ref.limit(20).orderBy('itemName').startAt(start).endAt(end)).valueChanges();
+    return combineLatest($one).pipe(
+        map(([one]) => [...one])
     )
 }
   barFound=0;
@@ -95,18 +114,10 @@ export class SearchPage implements OnInit {
       this.startAt = n;
       this.endAt = n + "\uf8ff";
       this.orQuery(this.startAt,this.endAt).subscribe(data => {
-        this.bars = [];
-        this.allbars = [];
-       this.bars = data;
+        this.menuItems = [];
+       this.menuItems = data;
 
-
-       this.bars.forEach(element => {
-         if(element.status == 'active'){
-           this.barFound++;
-         }
-       });
-
-       if(this.barFound > 0) {
+       if(this.menuItems.length > 0) {
         this.nomessage = false;
         this.nobars = false;
       } else {
@@ -114,55 +125,17 @@ export class SearchPage implements OnInit {
         this.nobars = true;
       }
 
-      if(this.bars.length < 1){
+      if(this.menuItems.length < 1){
         this.nomessage = false;
         this.nobars = true;
       }
-       
-       this.bars.map(item => {
-        var lat_lng = item.lat_lng.split(",");
-        var destinattion_lat = lat_lng[0];
-        var destinattion_lng = lat_lng[1];
-        if(item.barImage != "") {
-          this.image = item.barImage;
-        } else {
-          this.image = "assets/images/sample.png";
-        }
-        return {
-          barId : item.barId,
-          barName : item.barName,
-          image : this.image,
-          city : item.city,
-          status : item.status,
-          dist: this.distance(this.latitude,this.longitude,destinattion_lat,destinattion_lng,"K"),
-          addedBy : item.userId
-        };
-    }).forEach(item =>  {
-      if(item.status == 'active') {
-        this.api.getUserAccountInfo(item.addedBy).pipe(map((actions: any) => {
-          return actions.map(a => {
-            const data = a.payload.doc.data()
-            const id = a.payload.doc.id;
-            return { id, ...data };
-          });
-        })).subscribe(data => {
-          if(data[0].status == 'active'){
-            this.allbars.push(item);
-          }
-        });
-      }
-    });
-   
-    this.allbars.sort(function(a,b) {
-      return a.dist - b.dist;
-    });
       })
       
     }
     else {
       this.nomessage = true;
       this.nobars = false;
-      this.allbars = [];
+      this.menuItems = [];
     }
   }
   distance(lat1, lon1, lat2, lon2, unit) {
@@ -191,9 +164,11 @@ export class SearchPage implements OnInit {
 
   onClear(val)
   {
+    console.log(this.allMenuItems);
     this.nomessage = true;
     this.nobars = false;
-    this.allbars = [];
+    this.menuItems = [];
+    this.menuItems = this.allMenuItems;
   }
   onCancel(val)
   {
