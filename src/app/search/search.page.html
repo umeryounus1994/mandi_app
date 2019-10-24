@@ -1,38 +1,97 @@
 <ion-content>
   <div class="main">
-    <div class="container">
-      <div class="search-section">
-        <div class="back">
-          <ion-back-button class="light-icon-button" text="" icon="arrow-round-back"></ion-back-button>
+    <div class="header">
+      <div class="container">
+        <div class="top-bar">
+          <div class="left">
+            <div class="back">
+              <ion-back-button class="light-icon-button" text="" icon="arrow-round-back"></ion-back-button>
+            </div>
+          </div>
+          <div class="right">
+            <div class="icon cart">
+              <ion-icon (click)="navigateCart(userId)" class="light-icon-button" name="cart"></ion-icon>
+              <!-- Number of menu items added, show only if at least one menu item is added-->
+              <ion-badge name="items" *ngIf="flagbadge" color="danger">{{items}}</ion-badge>
+            </div>
+          </div>
         </div>
-       
-        <!-- <div class="search-bar">
-            <ion-searchbar [(ngModel)]="searchterm" (ionCancel)="onCancel($event)" (ionClear)="onClear($event)" (input)="search($event)" placeholder="{{ 'SEARCH.searchinput' | translate }}"></ion-searchbar>
-        </div> -->
       </div>
     </div>
+    <br>
     
     <div class="content">
       <div class="container">
-        <div class="title">
+        <div class="title" style="margin-top: 50px !important;">
           <!-- <h1>{{ 'SEARCH.title' | translate }}</h1> -->
           <!-- Exception if there are no search results -->
           <p *ngIf="nobars">{{ 'SEARCH.nolocation' | translate }}</p>
           <p *ngIf="nomessage">{{ 'SEARCH.nomessage' | translate }} {{categoryName}}</p>
         </div>
+        <div class="main-items">
+          <!-- Select cateogries -->
+          <div class="small-buttons">
+            <p class="small-button" (click)="onSelectChange(c.categoryId,c)" 
+            [ngClass]="{'small-button-active': c.active}"
+            *ngFor="let c of categories;let a = index">{{c.categoryName}}</p>
+          </div>
+  
+          <div class="container">
+            <ion-list class="menu-items">
+                <p style="margin-top: 10px !important;" *ngIf="allMenuItems.length < 1">No Items found for this category</p>
+              <div *ngFor="let m of allMenuItems">
+                <div class="menu-item" *ngIf="m.status == 'active'" >
+                  <div class="left" (click)="viewImage(m.itemImage,m.itemName)">
+                   
+                   
+                    <p class="p-title">{{m.itemName}}</p>
+                   
+                    <div class="price">
+                      <p class="sPrice">{{ m.price }} </p><p>€</p>
+                    </div>
+                  </div>
+                  <div class="right">
+                    
+                    <div class="cart" (click)="addToCart(m)">
+                      <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+                    </div>
+                  </div>
+                </div>
+                <div class="menu-item disabled" *ngIf="m.status == 'disable'" (click)="disabledAlert()">
+                  <div class="left" (click)="viewImage(m.itemImage,m.itemName)">
+                   
+                   
+                    <p class="p-title">{{m.itemName}}</p>
+                   
+                    <div class="price">
+                      <p class="sPrice">{{ m.price }} </p><p>€</p>
+                    </div>
+                  </div>
+                  <div class="right">
+                   
+                    <div class="cart">
+                      <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ion-list>
+  
+          </div>
+        </div>
         
-        <!-- All results for a specific search -->
-        <ion-list class="bars-small" *ngIf="menuItems.length > 0">
+       
+        <!-- <ion-list class="bars-small" *ngIf="menuItems.length > 0">
           <ion-card class="bar" *ngFor="let b of menuItems" (click)="navigateLocation(b.itemId)">
             <ion-img [src]="b.itemImage"></ion-img>
             <ion-card-content>
-              <!-- Bar name -->
+      
               <p class="p-title">{{b.itemName}}</p>
-              <!-- Bar city-->
+      
               <p>$ {{b.price}}</p>
             </ion-card-content>
           </ion-card>
-        </ion-list>
+        </ion-list> -->
 
       </div>
     </div>

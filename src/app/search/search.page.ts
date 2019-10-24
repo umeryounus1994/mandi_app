@@ -9,12 +9,14 @@ import { Observable, combineLatest } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NetworkService } from '../providers/network.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { LoadingController, Platform, AlertController, NavController, ToastController } from '@ionic/angular';
+import { LoadingController, Platform, AlertController, NavController, ToastController, ModalController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../providers/auth.service';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { TranslateService } from '@ngx-translate/core';
+import { CartService } from '../providers/cart.service';
+import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
  
 @Component({
   selector: 'app-search',
@@ -35,12 +37,25 @@ export class SearchPage implements OnInit {
   categoryName = '';
   menuItems = [];
   allMenuItems = [];
+  items=""
+  flagbadge=true;
+  type;
+  userId;
+  cartItems=[];
+  categories= [];
+  selectValue='';
+  all=[]
   constructor(private network1: Network, private router: Router, private navCtrl: NavController, private location: Location, private api : ApiService, private loadingCtrl : LoadingController,
     private afs : AngularFirestore, private platform: Platform,private network: NetworkService,private geolocation: Geolocation,
-    private auth : AuthService, private alertCtrl : AlertController, private diagnostic : Diagnostic, private translate: TranslateService) {
+    private auth : AuthService, private alertCtrl : AlertController, private diagnostic : Diagnostic, private translate: TranslateService,
+    private cart: CartService, private toastController: ToastController, private modalController: ModalController) {
       if(localStorage.getItem('category') !== undefined || localStorage.getItem('category') !== null) {
         this.categoryName = JSON.parse(localStorage.getItem('category')).category;
         this.loadMenuItems(this.categoryName);
+      }
+      this.type = JSON.parse(localStorage.getItem('data')).viewType;
+      if (this.type == "login") {
+        this.userId = JSON.parse(localStorage.getItem("data")).uid;
       }
    }
 
@@ -49,7 +64,8 @@ export class SearchPage implements OnInit {
     this.router.navigate(['location',barId]);
   }
   loadMenuItems(category){
-    this.afs.collection('menuitems',ref=>ref.where("page","==",category.toLowerCase())).snapshotChanges()
+
+    this.afs.collection('categories',ref=>ref.where("page","==",category.toLowerCase())).snapshotChanges()
     .pipe(map((actions: any) => {
       return actions.map(a => {
         const data = a.payload.doc.data()
@@ -58,10 +74,127 @@ export class SearchPage implements OnInit {
       });
     })).subscribe(data => {
       if(data.length > 0) {
-        this.menuItems = data;
-        this.allMenuItems = data;
+        this.categories = [];
+        this.categories = data;
+        this.categories.sort(function(a, b){
+          var nameA=a.categoryName.toLowerCase(), nameB=b.categoryName.toLowerCase();
+          if (nameA < nameB) //sort string ascending
+           return -1;
+          if (nameA > nameB)
+           return 1;
+          return 0; //default return value (no sorting)
+         });
+         this.categories.forEach(element => {
+          element.active = false;
+       });
+       if(this.categories.length>0){
+        this.onSelectChange(this.categories[0].categoryId,this.categories[0]);
+      }
+
       }
     });
+
+  }
+
+  addToCart(product) {
+    if (this.type == "login") {
+    let cartData = {
+      itemId: product.itemId,
+      name: product.itemName,
+      categoryName : product.categoryName,
+      page: product.page,
+      price: product.price,
+      userId: this.userId
+    }
+    console.log(cartData)
+    this.cart.addToCart(cartData).then((val) => {
+      this.toastMenuItem(this.translate.instant('ALERT.addToCartMessage'));
+      this.cart.getCartItems(cartData.userId).then(data => {
+        this.cartItems = data;
+        if (this.cartItems !== null) {
+          if (this.cartItems.length >= 0) {
+            // this.badge1=true;
+            this.items = this.cartItems.length.toString();
+          }
+          else {
+            this.flagbadge = false;
+          }
+        }
+      })
+    });
+  } else {
+      this.toastNotLoggedIn();
+      this.navCtrl.navigateRoot('/start');
+    }
+  }
+
+  ionViewDidEnter() {
+
+    this.cart.getCartItems(this.userId).then(data => {
+      this.cartItems = data;
+      if (this.cartItems !== null) {
+        if (this.cartItems.length >= 0) {
+          this.items = this.cartItems.length.toString();
+        }
+        else {
+          this.flagbadge = false;
+        }
+      }
+    })
+
+  }
+
+  async toastMenuItem(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 1000,
+      showCloseButton: false,
+      position: 'top'
+    });
+    toast.present();
+  }
+
+  onSelectChange(selectedValue: any,index) {
+    this.categories.forEach(element => {
+      element.active = false;
+    });
+    index.active = !index.active;
+    this.selectValue = selectedValue
+
+    if (selectedValue != "all") {
+      this.afs.collection('menuitems',ref=>ref.where("categoryId","==",selectedValue)).snapshotChanges().pipe(map((actions: any) => {
+        return actions.map(a => {
+          const data = a.payload.doc.data()
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })).subscribe(data => {
+        this.menuItems = [];
+        this.menuItems = data;
+        this.menuItems.sort(function(a, b){
+          var nameA=a.itemName.toLowerCase(), nameB=b.itemName.toLowerCase();
+          if (nameA < nameB) //sort string ascending
+           return -1;
+          if (nameA > nameB)
+           return 1;
+          return 0; //default return value (no sorting)
+         });
+         this.allMenuItems=this.menuItems
+      });
+    } else {
+      this.allMenuItems = [];
+      this.allMenuItems = this.menuItems;
+    }
+
+  }
+
+  navigateCart(userId): void {
+    if (this.type == "login") {
+      this.navCtrl.navigateForward(['location/order/cart', userId]);
+    } else {
+      this.toastNotLoggedIn();
+      this.navCtrl.navigateRoot('/start');
+    }
   }
 
   async presentLoading() {
@@ -73,95 +206,30 @@ export class SearchPage implements OnInit {
     return await loading.present();
   }
 
-  ngOnInit() {
-  }
-  async permissions(header, messsage) {
-
-    const alert = await this.alertCtrl.create({
-      header: header,
-      message: messsage,
-      buttons: [
-        {
-          text: 'Okay',
-          handler: () => {
-            if(this.platform.is('android')){
-              this.diagnostic.switchToLocationSettings();
-            }
-            else{
-              window.location.reload();
-            }
-          }
-        }
-      ]
+  async toastNotLoggedIn() {
+    const toast = await this.toastController.create({
+      message: this.translate.instant('ALERT.notLoggedInMessage'),
+      duration: 2000,
+      showCloseButton: false,
+      position: 'top'
     });
-
-    await alert.present();
-  }
-  orQuery(start,end){
-
-      const $one = this.afs.collection('menuitems', ref => ref.limit(20).orderBy('itemName').startAt(start).endAt(end)).valueChanges();
-    return combineLatest($one).pipe(
-        map(([one]) => [...one])
-    )
-}
-  barFound=0;
-  search($event) {
-    let q = $event.target.value;
-    if (q != '') {
-      //this.nomessage = true;
-      var n = q.toUpperCase();
-      
-      this.startAt = n;
-      this.endAt = n + "\uf8ff";
-      this.orQuery(this.startAt,this.endAt).subscribe(data => {
-        this.menuItems = [];
-       this.menuItems = data;
-
-       if(this.menuItems.length > 0) {
-        this.nomessage = false;
-        this.nobars = false;
-      } else {
-        this.nomessage = false;
-        this.nobars = true;
-      }
-
-      if(this.menuItems.length < 1){
-        this.nomessage = false;
-        this.nobars = true;
-      }
-      })
-      
-    }
-    else {
-      this.nomessage = true;
-      this.nobars = false;
-      this.menuItems = [];
-    }
-  }
-  distance(lat1, lon1, lat2, lon2, unit) {
-    if ((lat1 == lat2) && (lon1 == lon2)) {
-      return 0;
-    }
-    else {
-      var radlat1 = Math.PI * lat1/180;
-      var radlat2 = Math.PI * lat2/180;
-      var theta = lon1-lon2;
-      var radtheta = Math.PI * theta/180;
-      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-      if (dist > 1) {
-        dist = 1;
-      }
-      dist = Math.acos(dist);
-      dist = dist * 180/Math.PI;
-      dist = dist * 60 * 1.1515;
-      if (unit=="K") { dist = dist * 1.609344 }
-      if (unit=="N") { dist = dist * 0.8684 }
-      return dist.toFixed(2);
-    }
+    toast.present();
   }
 
-
-
+  ngOnInit() {
+  //  this.cart.removeAllCartItems(this.userId)
+    this.cart.getCartItems(this.userId).then(data => {
+      this.cartItems = data;
+      if (this.cartItems !== null) {
+        if (this.cartItems.length >= 0) {
+          this.items = this.cartItems.length.toString();
+        }
+        else {
+          this.flagbadge = false;
+        }
+      }
+    })
+  }
   onClear(val)
   {
     console.log(this.allMenuItems);
@@ -173,6 +241,21 @@ export class SearchPage implements OnInit {
   onCancel(val)
   {
     console.log("a");
+  }
+
+  async viewImage(src: string, itemName: string) {
+    const modal = await this.modalController.create({
+      component: ImageViewerComponent,
+      componentProps: {
+        imgSource: src,
+        imgTitle: itemName
+      },
+      cssClass: 'modal-fullscreen',
+      keyboardClose: true,
+      showBackdrop: true
+    });
+
+    return await modal.present();
   }
 
 }

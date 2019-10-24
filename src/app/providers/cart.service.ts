@@ -28,19 +28,12 @@ export class CartService {
    }
 
   addToCart(product) {
-    this.CART_KEY = product.barId;
+    this.CART_KEY = product.userId;
     return this.getCartItems(this.CART_KEY).then(result => {
       if (result) {
         result.push(product);
           return this.storage.set(this.CART_KEY, result);
-        // if (!this.containsObject(product, result)) {
-          
-        // } else {
-        //   let index = result.findIndex(x => x.itemId == product.itemId);
-        //    result.splice(index, 1);
-        //   result.push(product);
-        //   return this.storage.set(this.CART_KEY, result);
-        // }
+      
 
       } else {
         return this.storage.set(this.CART_KEY, [product]);

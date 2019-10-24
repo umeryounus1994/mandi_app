@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget defaultlocale="Germany" id="com.smartout" version="0.0.60" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Smartout</name>
+<widget defaultlocale="Germany" id="com.houseofmandi" version="0.0.60" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>House of Mandi</name>
     <description>Deine Lieblingsbar jetzt in deinen Händen.</description>
     <author email="info@smartout.de" href="https://smartout.de/">Smartout Team</author>
     <content src="index.html" />

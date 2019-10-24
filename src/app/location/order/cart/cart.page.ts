@@ -49,8 +49,8 @@ export class CartPage implements OnInit {
 
   
   pro;
-  remove(product,barId,index) {
-    if(product.page == "Shishakarte") {
+  remove(product,index) {
+    if(product.page == "breakfast") {
       this.shisha.splice(index,1);
     } 
     if(product.page == "Getrankekarte") {
@@ -61,7 +61,7 @@ export class CartPage implements OnInit {
     } 
     this.istPrice = false
     this.secondPrice = true
-    var pro = product.price.replace(",",".");
+    var pro = product.price;
     console.log(pro);
     this.totalPrice = this.totalPrice - parseFloat(pro)
    console.log(this.totalPrice);
@@ -83,7 +83,7 @@ export class CartPage implements OnInit {
     }
     console.log(this.totalPrice1)
     this.vibration.vibrate(50);
-    this.cart.removeFromCart(product,barId).then(deleted => {
+    this.cart.removeFromCart(product,this.userId).then(deleted => {
     })
   }
 
@@ -92,21 +92,17 @@ export class CartPage implements OnInit {
   }
 
   ngOnInit() {
-    if (this.network.type == '' || this.network.type == 'unknown' || this.network.type == 'ethernet' || this.network.type == 'cell_2g' || this.network.type == 'none') {
-      this.api.toastInternet();
-    }
-    else {
     // this.presentLoading();
     this.cart.getCartItems(this.CART_KEY).then((val) => {
       if(val.length > 0) {
-       
+       console.log(val);
       val.forEach(sh => {
-        var p = sh.price.replace(",",".");
-        this.totalPrice = this.totalPrice + parseFloat(p);
+        
+        this.totalPrice = this.totalPrice + parseFloat(sh.price);
         this.finalPrice = ""
         this.finalPrice = ""+this.totalPrice;
 
-        if(sh.page == "Shishakarte") {
+        if(sh.page == "breakfast") {
           this.shisha.push(sh);
         }
         if(sh.page == "Getrankekarte") {
@@ -140,7 +136,7 @@ export class CartPage implements OnInit {
     }
     // this.loadingCtrl.dismiss();
     })
-  }
+
   }
 
   async presentLoading() {

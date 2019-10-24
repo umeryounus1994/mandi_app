@@ -33,12 +33,9 @@
                 </div>
               </div>
               <div class="right">
-                <!-- Decrease by one -->
-                <ion-icon name="remove"></ion-icon>
-                <!-- Amount of product (max. 9 products) -->
-                <p class="p-title">9</p>
-                <!-- Increase by one -->
-                <ion-icon name="add"></ion-icon>
+                  <div class="remove" (click)="remove(s,i)">
+                      <ion-icon ios="ios-close" md="md-close"></ion-icon>
+                    </div>
               </div>
             </div>
           </div>
@@ -118,7 +115,7 @@
           <h2 *ngIf="secondPrice" name="totalPrice1">{{ 'CART.totalAmount' | translate }}<br><span class="total">{{totalPrice1}}</span> €</h2>
 
           <!-- Redirect to payment page -->
-          <ion-button color="primary" expand="block" (click)="navigatePayment()">{{ 'CART.orderNow' | translate }}</ion-button>
+          <!-- <ion-button color="primary" expand="block" (click)="navigatePayment()">{{ 'CART.orderNow' | translate }}</ion-button> -->
         </div>
       </div>
     </div>
