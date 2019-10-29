@@ -41,7 +41,7 @@
                 <p style="margin-top: 10px !important;" *ngIf="allMenuItems.length < 1">No Items found for this category</p>
               <div *ngFor="let m of allMenuItems">
                 <div class="menu-item" *ngIf="m.status == 'active'" >
-                  <div class="left" (click)="viewImage(m.itemImage,m.itemName)">
+                  <div class="left" (click)="viewImage(m.itemImage,m.itemName,m.description)">
                    
                    
                     <p class="p-title">{{m.itemName}}</p>
@@ -58,7 +58,7 @@
                   </div>
                 </div>
                 <div class="menu-item disabled" *ngIf="m.status == 'disable'" (click)="disabledAlert()">
-                  <div class="left" (click)="viewImage(m.itemImage,m.itemName)">
+                  <div class="left" (click)="viewImage(m.itemImage,m.itemName,m.description)">
                    
                    
                     <p class="p-title">{{m.itemName}}</p>

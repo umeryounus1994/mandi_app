@@ -106,7 +106,6 @@ export class SearchPage implements OnInit {
       price: product.price,
       userId: this.userId
     }
-    console.log(cartData)
     this.cart.addToCart(cartData).then((val) => {
       this.toastMenuItem(this.translate.instant('ALERT.addToCartMessage'));
       this.cart.getCartItems(cartData.userId).then(data => {
@@ -240,15 +239,15 @@ export class SearchPage implements OnInit {
   }
   onCancel(val)
   {
-    console.log("a");
   }
 
-  async viewImage(src: string, itemName: string) {
+  async viewImage(src: string, itemName: string, desc: string) {
     const modal = await this.modalController.create({
       component: ImageViewerComponent,
       componentProps: {
         imgSource: src,
-        imgTitle: itemName
+        imgTitle: itemName,
+        imgDescription: desc
       },
       cssClass: 'modal-fullscreen',
       keyboardClose: true,

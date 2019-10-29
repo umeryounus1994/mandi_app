@@ -62,26 +62,21 @@ export class CartPage implements OnInit {
     this.istPrice = false
     this.secondPrice = true
     var pro = product.price;
-    console.log(pro);
     this.totalPrice = this.totalPrice - parseFloat(pro)
-   console.log(this.totalPrice);
     
     this.totalPrice1 = this.totalPrice.toFixed(2);
     this.auth.price = 0;
     this.auth.price = this.totalPrice;
     this.totalPrice1 = this.totalPrice;
-    console.log(this.totalPrice1)
     if(this.totalPrice1.toString().indexOf(".") !== -1) {
       this.totalPrice1 = this.totalPrice1.toFixed(2).toString().replace(".",",");
     } else {
       this.totalPrice1 = this.totalPrice1 + ",00";
     }
     let x = this.totalPrice1.indexOf('-');
-    console.log(x);
     if(x > -1){
       this.totalPrice1 = this.totalPrice1.substring(x+1,this.totalPrice1.length);
     }
-    console.log(this.totalPrice1)
     this.vibration.vibrate(50);
     this.cart.removeFromCart(product,this.userId).then(deleted => {
     })

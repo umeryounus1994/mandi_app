@@ -14,3 +14,8 @@
     </ion-slide>
   </ion-slides>
 </ion-content>
+<ion-footer *ngIf="imgDescription.length">
+  <ion-toolbar color="dark" text-center>
+    <ion-text>{{ imgDescription }}</ion-text>
+  </ion-toolbar>
+</ion-footer>
