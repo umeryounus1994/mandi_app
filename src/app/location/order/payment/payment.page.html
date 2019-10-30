@@ -7,16 +7,20 @@
         </div>
       </div>
     </div>
-
+    
     <div class="content">
       <div class="title">
         <div class="container">
-          <h1>{{ 'CART.title' | translate }}</h1>
-
-          <ion-button color="primary" expand="block" (click)="navigateConfirmation()">{{ 'CONFIRMATION.backHome' | translate }}</ion-button>
+          <h1>Proceed with the Order</h1>
         </div>
       </div>
 
+      <!-- Starts NFC-Scan -->
+      <div class="continue">
+        <div class="container">
+          <ion-button color="primary" expand="block" (click)="ReadTag()">Confirm Order</ion-button>
+        </div>
+      </div>
     </div>
   </div>
 </ion-content>
