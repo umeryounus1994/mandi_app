@@ -13,9 +13,8 @@
       <div class="swiper-zoom-container"><img [src]="imgSource" height="100vh" /></div>
     </ion-slide>
   </ion-slides>
+  <br>
+  <ion-text *ngIf="imgDescription.length"><p style="margin-left: 8px !important;">{{ imgDescription }}</p></ion-text> <br>
+  <ion-text style="float: right !important; margin-right: 10px !important;">Price: ${{ imgPrice }}</ion-text>
+
 </ion-content>
-<ion-footer *ngIf="imgDescription.length">
-  <ion-toolbar color="dark" text-center>
-    <ion-text>{{ imgDescription }}</ion-text>
-  </ion-toolbar>
-</ion-footer>

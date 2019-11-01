@@ -241,13 +241,14 @@ export class SearchPage implements OnInit {
   {
   }
 
-  async viewImage(src: string, itemName: string, desc: string) {
+  async viewImage(src: string, itemName: string, desc: string,price: string) {
     const modal = await this.modalController.create({
       component: ImageViewerComponent,
       componentProps: {
         imgSource: src,
         imgTitle: itemName,
-        imgDescription: desc
+        imgDescription: desc,
+        imgPrice: price
       },
       cssClass: 'modal-fullscreen',
       keyboardClose: true,

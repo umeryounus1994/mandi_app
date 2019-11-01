@@ -40,37 +40,39 @@
             <ion-list class="menu-items">
                 <p style="margin-top: 10px !important;" *ngIf="allMenuItems.length < 1">No Items found for this category</p>
               <div *ngFor="let m of allMenuItems">
+                  <img (click)="viewImage(m.itemImage,m.itemName,m.description,m.price)" src="{{m.itemImage}}" *ngIf="m.status == 'active'" style="border-radius: 20px !important;"/>
                 <div class="menu-item" *ngIf="m.status == 'active'" >
-                  <div class="left" (click)="viewImage(m.itemImage,m.itemName,m.description)">
+                   
+                  <div class="left" (click)="viewImage(m.itemImage,m.itemName,m.description,m.price)">
                    
                    
                     <p class="p-title">{{m.itemName}}</p>
                    
                     <div class="price">
-                      <p class="sPrice">{{ m.price }} </p><p>€</p>
+                      <p class="sPrice">${{ m.price }} </p>
                     </div>
                   </div>
                   <div class="right">
                     
                     <div class="cart" (click)="addToCart(m)">
-                      <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+                      <ion-icon ios="ios-add" md="md-add"></ion-icon>
                     </div>
                   </div>
                 </div>
                 <div class="menu-item disabled" *ngIf="m.status == 'disable'" (click)="disabledAlert()">
-                  <div class="left" (click)="viewImage(m.itemImage,m.itemName,m.description)">
+                  <div class="left" (click)="viewImage(m.itemImage,m.itemName,m.description,m.price)">
                    
                    
                     <p class="p-title">{{m.itemName}}</p>
                    
                     <div class="price">
-                      <p class="sPrice">{{ m.price }} </p><p>€</p>
+                      <p class="sPrice">${{ m.price }} </p>
                     </div>
                   </div>
                   <div class="right">
                    
                     <div class="cart">
-                      <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+                      <ion-icon ios="ios-add" md="md-add"></ion-icon>
                     </div>
                   </div>
                 </div>

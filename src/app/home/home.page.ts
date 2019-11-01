@@ -46,6 +46,10 @@ export class HomePage implements OnInit {
     {
       categoryName : 'Breakfast',
       image: 'assets/images/breakfast.jpg'
+    },
+    {
+      categoryName : 'Lunch',
+      image: 'assets/images/lunch.jpg'
     }
   ]
 

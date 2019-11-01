@@ -10,6 +10,7 @@ export class ImageViewerComponent implements OnInit {
   @Input() imgSource = '';
   @Input() imgTitle = '';
   @Input() imgDescription = '';
+  @Input() imgPrice = '';
 
   slideOpts = {
     centeredSlides: 'true'
