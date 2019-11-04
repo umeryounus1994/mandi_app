@@ -50,6 +50,10 @@ export class HomePage implements OnInit {
     {
       categoryName : 'Lunch',
       image: 'assets/images/lunch.jpg'
+    },
+    {
+      categoryName : 'Dinner',
+      image: 'assets/images/lunch.jpg'
     }
   ]
 
@@ -195,6 +199,9 @@ export class HomePage implements OnInit {
   }
 
   navigateMenu(category): void {
+    if(category === 'Dinner'){
+      category = 'Lunch'
+    }
     //this.navCtrl.navigateForward('profile/' + barId);
     this.auth.saveCategory(category);
     this.router.navigate(['search']);
