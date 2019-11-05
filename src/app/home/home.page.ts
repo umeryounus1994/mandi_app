@@ -44,15 +44,13 @@ export class HomePage implements OnInit {
 
   categories = [
     {
+      cName: 'Breakfast',
       categoryName : 'Breakfast',
       image: 'assets/images/breakfast.jpg'
     },
     {
+      cName: 'Lunch/Dinner',
       categoryName : 'Lunch',
-      image: 'assets/images/lunch.jpg'
-    },
-    {
-      categoryName : 'Dinner',
       image: 'assets/images/lunch.jpg'
     }
   ]
