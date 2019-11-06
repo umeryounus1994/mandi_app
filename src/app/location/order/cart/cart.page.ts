@@ -40,10 +40,10 @@ export class CartPage implements OnInit {
       this.userId = JSON.parse(localStorage.getItem("data")).uid;
     }
     this.auth.saveComments("")
-    $(document).ready(function () {
-      $('.sPrice').mask('#.##0,00', {reverse: true});
-      $('.total').mask('#.##0,00', {reverse: true});
-    });
+    // $(document).ready(function () {
+    //   $('.sPrice').mask('#.##0,00', {reverse: true});
+    //   $('.total').mask('#.##0,00', {reverse: true});
+    // });
     
   }
 
@@ -53,7 +53,7 @@ export class CartPage implements OnInit {
     if(product.page == "breakfast") {
       this.shisha.splice(index,1);
     } 
-    if(product.page == "Getrankekarte") {
+    if(product.page == "lunch") {
       this.drinks.splice(index,1);
     } 
     if(product.page == "Speisekarte") {
@@ -100,7 +100,7 @@ export class CartPage implements OnInit {
         if(sh.page == "breakfast") {
           this.shisha.push(sh);
         }
-        if(sh.page == "Getrankekarte") {
+        if(sh.page == "lunch") {
           this.drinks.push(sh);
         }
         if(sh.page == "Speisekarte") {

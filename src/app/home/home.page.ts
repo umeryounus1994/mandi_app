@@ -49,7 +49,7 @@ export class HomePage implements OnInit {
       image: 'assets/images/breakfast.jpg'
     },
     {
-      cName: 'Lunch/Dinner',
+      cName: 'Lunch/Dinner/Others',
       categoryName : 'Lunch',
       image: 'assets/images/lunch.jpg'
     }
@@ -76,7 +76,6 @@ export class HomePage implements OnInit {
     if (this.type == 'login') {
       this.userId = JSON.parse(localStorage.getItem('data')).uid;
     }
-    this.LoadNearByBars();
   }
 
   async notifyToast(body){ 
@@ -153,24 +152,6 @@ export class HomePage implements OnInit {
       ]
     });
     await alert.present();
-  }
-
-  LoadNearByBars() {
-    this.presentLoading();
-    this.afs.collection('categories').snapshotChanges().pipe(map((actions: any) => {
-      return actions.map(a => {
-        const data = a.payload.doc.data()
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    })).subscribe(data => {
-      console.log(data);
-      this.loadingCtrl.dismiss();
-    })
-  }
-
-  doRefresh(){
-    this.LoadNearByBars();
   }
 
   async presentLoading() {

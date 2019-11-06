@@ -29,7 +29,7 @@
                 <p class="p-title">{{s.categoryName}} ({{s.name}})</p>
                 <!-- Price of the category-->
                 <div class="price">
-                  <p class="sPrice">{{ s.price }} </p><p>€</p>
+                  <p class="sPrice">${{ s.price }} </p>
                 </div>
               </div>
               <div class="right">
@@ -46,7 +46,7 @@
     <!-- If there are any menu items from DRINKS added, this one should show up -->
       <div class="drinks-items">
         <div class="container">
-          <h3 *ngIf="drinks.length > 0">{{ 'MENUCARDS.drinks' | translate }}</h3>
+          <h3 *ngIf="drinks.length > 0">Lunch/Dinner/Other</h3>
         
           <div class="list-items">
             <div class="item" *ngFor="let d of drinks;let ab = index">
@@ -55,16 +55,13 @@
                 <p class="p-title">{{d.name}}</p>
                 <!-- Price of the category-->
                 <div class="price">
-                  <p class="sPrice">{{ d.price }} </p><p>€</p>
+                  <p class="sPrice">${{ d.price }} </p>
                 </div>
               </div>
               <div class="right">
-                <!-- Decrease by one -->
-                <ion-icon name="remove"></ion-icon>
-                <!-- Amount of product (max. 9 products) -->
-                <p class="p-title">9</p>
-                <!-- Increase by one -->
-                <ion-icon name="add"></ion-icon>
+                <div class="remove" (click)="remove(d,ab)">
+                  <ion-icon ios="ios-close" md="md-close"></ion-icon>
+                </div>
               </div>
             </div>
           </div>
@@ -83,7 +80,7 @@
                 <p class="p-title">{{f.name}}</p>
                 <!-- Price of the category-->
                 <div class="price">
-                  <p class="sPrice">{{ f.price }} </p><p>€</p>
+                  <p class="sPrice">${{ f.price }} </p>
                 </div>
               </div>
               <div class="right">
@@ -112,7 +109,7 @@
         <div class="container">
           <h2 *ngIf="istPrice">{{ 'CART.totalAmount' | translate }}<br><span class="total">{{finalP}}</span> €</h2>
           
-          <h2 *ngIf="secondPrice" name="totalPrice1">{{ 'CART.totalAmount' | translate }}<br><span class="total">{{totalPrice1}}</span> €</h2>
+          <h2 *ngIf="secondPrice" name="totalPrice1">{{ 'CART.totalAmount' | translate }}<br><span class="total">${{totalPrice1}}</span></h2>
 
           <!-- Redirect to payment page -->
           <ion-button color="primary" expand="block" (click)="navigatePayment()">{{ 'CART.orderNow' | translate }}</ion-button>
