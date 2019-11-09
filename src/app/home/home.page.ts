@@ -49,10 +49,36 @@ export class HomePage implements OnInit {
       image: 'assets/images/breakfast.jpg'
     },
     {
-      cName: 'Lunch/Dinner/Others',
-      categoryName : 'Lunch',
+      cName: 'Lunch',
+      categoryName : 'Lunch/Dinner',
       image: 'assets/images/lunch.jpg'
-    }
+    },
+    {
+      cName: 'Dinner',
+      categoryName : 'Lunch/Dinner',
+      image: 'assets/images/dinner.jpg'
+    },
+    {
+      cName: 'Sides',
+      categoryName : 'Sides',
+      image: 'assets/images/sides.jpg'
+    },
+    {
+      cName: 'Deserts',
+      categoryName : 'Desserts',
+      image: 'assets/images/deserts.jpg'
+    },
+    {
+      cName: 'Family Platters',
+      categoryName : 'Family Platters',
+      image: 'assets/images/family_platters.jpg'
+    },
+    {
+      cName: 'Shared Platters',
+      categoryName : 'Shared Platters',
+      image: 'assets/images/mix_platter.jpg'
+    },
+    
   ]
 
   constructor(private translate: TranslateService, private router: Router, private location: Location, private platform: Platform,

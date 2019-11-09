@@ -64,8 +64,7 @@ export class SearchPage implements OnInit {
     this.router.navigate(['location',barId]);
   }
   loadMenuItems(category){
-
-    this.afs.collection('categories',ref=>ref.where("page","==",category.toLowerCase())).snapshotChanges()
+    this.afs.collection('categories',ref=>ref.where("categoryName","==",category)).snapshotChanges()
     .pipe(map((actions: any) => {
       return actions.map(a => {
         const data = a.payload.doc.data()
@@ -76,17 +75,6 @@ export class SearchPage implements OnInit {
       if(data.length > 0) {
         this.categories = [];
         this.categories = data;
-        this.categories.sort(function(a, b){
-          var nameA=a.categoryName.toLowerCase(), nameB=b.categoryName.toLowerCase();
-          if (nameA < nameB) //sort string ascending
-           return -1;
-          if (nameA > nameB)
-           return 1;
-          return 0; //default return value (no sorting)
-         });
-         this.categories.forEach(element => {
-          element.active = false;
-       });
        if(this.categories.length>0){
         this.onSelectChange(this.categories[0].categoryId,this.categories[0]);
       }

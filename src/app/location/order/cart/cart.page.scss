@@ -19,6 +19,20 @@ ion-textarea {
   color: white;
   padding: 5px 10px;
 }
+ion-select {
+  background: rgba(25, 28, 32, 0.8);
+  border-radius: 25px;
+  height: 44px;
+  color: white;
+  padding: 12px 10px;
+}
+.select-placeholder {
+  opacity: 1 !important;
+  color:white !important;
+}
+.select-text {
+  color:white !important;
+}
 
 .price { p {display: inline-block;} }
 

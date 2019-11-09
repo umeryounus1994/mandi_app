@@ -20,7 +20,7 @@
       <!-- If there are any menu items from SHISHA added, this one should show up -->
       <div class="geschmacker-items">
         <div class="container">
-          <h3 *ngIf="shisha.length > 0">Breakfast</h3>
+          <h3 *ngIf="shisha.length > 0">All Cart Items</h3>
         
           <div class="list-items">
             <div class="item" *ngFor="let s of shisha;let i = index">
@@ -102,12 +102,22 @@
           <h3>{{ 'CART.notes' | translate }}</h3>
           <ion-textarea (input)="comments($event.target.value)"></ion-textarea>
         </div>
+        <div class="container">
+          <h3>Select Table</h3>
+          <ion-select cancelText="Cancel" okText="Ok" placeholder="Select Table" [(ngModel)]="tableNo" name="tableNo" class="input">
+            <ion-select-option value="1">Table 1</ion-select-option>
+            <ion-select-option value="2">Table 2</ion-select-option>
+            <ion-select-option value="3">Table 3</ion-select-option>
+            <ion-select-option value="4">Table 4</ion-select-option>
+            <ion-select-option value="5">Table 5</ion-select-option>
+          </ion-select>
+        </div>
       </div>
 
       <!-- Total amount, should be also only visible if there is at least one menu item -->
       <div class="total-amount">
         <div class="container">
-          <h2 *ngIf="istPrice">{{ 'CART.totalAmount' | translate }}<br><span class="total">{{finalP}}</span> €</h2>
+          <h2 *ngIf="istPrice">{{ 'CART.totalAmount' | translate }}<br><span class="total">${{finalP}}</span></h2>
           
           <h2 *ngIf="secondPrice" name="totalPrice1">{{ 'CART.totalAmount' | translate }}<br><span class="total">${{totalPrice1}}</span></h2>
 

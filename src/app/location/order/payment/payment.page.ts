@@ -41,6 +41,7 @@ export class PaymentPage implements OnInit {
   nfc_enabled = false;
   comments=""
   foundElement : any;
+  tableNo='';
   constructor(private network1: Network, private router: Router, private location: Location, private nfc: NFC, private ndef: Ndef, private route: ActivatedRoute,
     private auth: AuthService, private plt: Platform, private api: ApiService, private cart: CartService,
     private dev: Device, public loadingCtrl: LoadingController, public alertCtrl: AlertController, private toastController: ToastController,
@@ -60,6 +61,10 @@ export class PaymentPage implements OnInit {
     if(JSON.parse(localStorage.getItem("comments")).comments) {
 
       this.comments = JSON.parse(localStorage.getItem("comments")).comments;
+    }
+    if(JSON.parse(localStorage.getItem("table")).table) {
+
+      this.tableNo = JSON.parse(localStorage.getItem("table")).table;
     }
 
 
@@ -81,13 +86,7 @@ export class PaymentPage implements OnInit {
           return { id, ...data };
         });
       })).subscribe(data1 => {
-       
         this.allArray = data1;
-        console.log(this.allArray)
-        // this.allArray.sort(function (a, b) {
-        //   return a.orderTime - b.orderTime;
-        // });
-
         data1.forEach(element => {
           if(element.status == 'pending' || element.status == 'completed'){
             this.foundElement = element;
@@ -184,7 +183,8 @@ export class PaymentPage implements OnInit {
       status: "pending",
       total: this.price,
       userName: this.username,
-      userOrderId: this.makeid()
+      userOrderId: this.makeid(),
+      tableNo: this.tableNo
     }
     this.orderDAta = {
       dateExport: this.dateExport,
@@ -194,7 +194,8 @@ export class PaymentPage implements OnInit {
       userId: this.userId,
       userName: this.username,
       userOrderId: this.userOrders.userOrderId,
-      comments : this.comments
+      comments : this.comments,
+      tableNo: this.tableNo
     }
 
         // NFC Scan has started loading

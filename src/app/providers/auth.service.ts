@@ -97,6 +97,12 @@ export class AuthService {
     }
     localStorage.setItem('comments',JSON.stringify(d));
   }
+  saveTable(table) {
+    let d = {
+      "table" : table
+    }
+    localStorage.setItem('table',JSON.stringify(d));
+  }
 
   saveTimerBarId(barId){
     let d = {

@@ -516,6 +516,13 @@ ion-spinner{ color: #fff !important; }
   -webkit-animation: scale .75s ease-in-out infinite alternate;
   animation: scale .75s ease-in-out infinite alternate; 
 }
+.select-placeholder {
+  opacity: 1 !important;
+  color:white !important;
+}
+.select-text {
+  color:white !important;
+}
 
 ion-loading { --background: unset !important; }
 

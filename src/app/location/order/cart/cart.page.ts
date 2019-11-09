@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { CartService } from '../../../providers/cart.service';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AuthService } from '../../../providers/auth.service';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { Network } from '@ionic-native/network/ngx';
@@ -29,9 +29,12 @@ export class CartPage implements OnInit {
   secondPrice = false;
   finalPrice = ""
   finalP : any;
+  tableNo:'';
   
   constructor(private api: ApiService,private network: Network, private location: Location, public cart: CartService, private route: ActivatedRoute,
-    private loadingCtrl: LoadingController, private auth : AuthService, private navCtrl: NavController, private vibration: Vibration) {
+    private loadingCtrl: LoadingController, private auth : AuthService,
+    private toastController: ToastController,
+    private navCtrl: NavController, private vibration: Vibration) {
     this.route.params.subscribe(params => {
       this.CART_KEY = params['id'];
     });
@@ -39,7 +42,8 @@ export class CartPage implements OnInit {
     if (this.type == "login") {
       this.userId = JSON.parse(localStorage.getItem("data")).uid;
     }
-    this.auth.saveComments("")
+    this.auth.saveComments("");
+    this.auth.saveTable("");
     // $(document).ready(function () {
     //   $('.sPrice').mask('#.##0,00', {reverse: true});
     //   $('.total').mask('#.##0,00', {reverse: true});
@@ -50,15 +54,16 @@ export class CartPage implements OnInit {
   
   pro;
   remove(product,index) {
-    if(product.page == "breakfast") {
-      this.shisha.splice(index,1);
-    } 
-    if(product.page == "lunch") {
-      this.drinks.splice(index,1);
-    } 
-    if(product.page == "Speisekarte") {
-      this.foods.splice(index,1);
-    } 
+    this.shisha.splice(index,1);
+    // if(product.page == "breakfast") {
+     
+    // } 
+    // if(product.page == "lunch") {
+    //   this.drinks.splice(index,1);
+    // } 
+    // if(product.page == "Speisekarte") {
+    //   this.foods.splice(index,1);
+    // } 
     this.istPrice = false
     this.secondPrice = true
     var pro = product.price;
@@ -81,8 +86,21 @@ export class CartPage implements OnInit {
     this.cart.removeFromCart(product,this.userId).then(deleted => {
     })
   }
+  async toastMenuItem(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 1000,
+      showCloseButton: false,
+      position: 'top'
+    });
+    toast.present();
+  }
 
   navigatePayment(): void {
+    if(this.tableNo === ''){
+      this.toastMenuItem('Select Table');
+    }
+    this.auth.saveTable(this.tableNo);
     this.navCtrl.navigateForward(["location/order/payment",this.CART_KEY]);
   }
 
@@ -96,16 +114,16 @@ export class CartPage implements OnInit {
         this.totalPrice = this.totalPrice + parseFloat(sh.price);
         this.finalPrice = ""
         this.finalPrice = ""+this.totalPrice;
-
-        if(sh.page == "breakfast") {
-          this.shisha.push(sh);
-        }
-        if(sh.page == "lunch") {
-          this.drinks.push(sh);
-        }
-        if(sh.page == "Speisekarte") {
-          this.foods.push(sh);
-        }
+        this.shisha.push(sh);
+        // if(sh.page == "breakfast") {
+         
+        // }
+        // if(sh.page == "lunch") {
+        //   this.drinks.push(sh);
+        // }
+        // if(sh.page == "Speisekarte") {
+        //   this.foods.push(sh);
+        // }
       })
       
       // if(this.totalPrice.toString().indexOf('.') !== -1) {
