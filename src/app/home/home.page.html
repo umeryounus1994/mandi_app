@@ -4,7 +4,7 @@
       <div class="grid-2">
         <div class="grid-item">
           <img src="../../assets/images/app_icon.png">
-          <p>  I'm your Table Waiter... <br> Ready to order ?</p>
+          <p>  Hi! I'm your Table Waiter... <br> Ready to order ?</p>
           <!-- <p>{{ 'HOME.title' | translate }}</p> -->
         </div> 
         <div class="grid-item">
@@ -20,14 +20,15 @@
   
   <!-- All nearby bars listed-->
   <ion-list class="bars">
-    <ion-card class="bar" *ngFor="let b of categories" (click)="navigateMenu(b.categoryName)">
+    <ion-card class="bar" *ngFor="let b of categories" >
       <!-- Single bar: Image is set from the bar gallery (always first image, as set by bar owner) -->
-      <ion-img [src]="b.image"></ion-img>
+      <ion-img [src]="b.image" (click)="navigateMenu(b.categoryName)"></ion-img>
+  
       <ion-card-header>
         <!-- Bar name -->
-        <ion-card-title>{{b.cName}}</ion-card-title>
-        <!-- Bar city and distance to the bar -->
-        <!-- <ion-card-subtitle>{{ 'HOME.city' | translate:{city_value: b.city} }}<br>{{ 'HOME.distance' | translate:{distance_value: b.dist} }}</ion-card-subtitle> -->
+        <ion-card-title style="float: left;" (click)="navigateMenu(b.categoryName)">{{b.cName}}</ion-card-title>
+        <ion-button style="float: right;border-radius: 0px !important;margin-top: -10px !important;" color="white" expand="block" 
+        (click)="navigateMenu(b.categoryName)">Order</ion-button>
       </ion-card-header>
     </ion-card>
   </ion-list>

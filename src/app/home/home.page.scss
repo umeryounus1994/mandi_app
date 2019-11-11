@@ -85,7 +85,6 @@ ion-header {
     }
   
     ion-card-header {
-      position: absolute;
       bottom: 0;
       padding: 5.0974512 !important;
   
@@ -133,6 +132,12 @@ ion-header {
 // iPhone XS Max
 @media only screen and (device-width : 414px) and (device-height : 896px) and (-webkit-device-pixel-ratio : 3){
   ion-refresher { top: 90px !important; }
+}
+ion-button {
+  border-radius: 0px !important;
+}
+.button-native {
+  border-radius: 0px !important;
 }
 
 .search {
