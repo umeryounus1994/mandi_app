@@ -1,8 +1,8 @@
 ion-header {
   //background: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0, 1) 62%);
-  position: absolute;
+  // position: absolute;
 
-  img { width: 120px; }
+  img { width: 175px; }
 
   .grid-2 {
     height: 120px;
@@ -17,9 +17,9 @@ ion-header {
 
         p {
           margin: 0;
-          font-size: 12px;
+          font-size: 15px;
           color: white;
-          text-transform: uppercase;
+         // text-transform: uppercase;
           font-weight: 700;
           margin-top: -6px;
         }

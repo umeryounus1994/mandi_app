@@ -78,6 +78,16 @@ export class HomePage implements OnInit {
       categoryName : 'Shared Platters',
       image: 'assets/images/mix_platter.jpg'
     },
+    {
+      cName: 'Private Rooms',
+      categoryName : 'Private Rooms',
+      image: 'assets/images/room2.jpg'
+    },
+    {
+      cName: 'Catering',
+      categoryName : 'Catering',
+      image: 'assets/images/catering.jpg'
+    },
     
   ]
 
@@ -86,17 +96,11 @@ export class HomePage implements OnInit {
     public alertCtrl: AlertController, private api: ApiService, public loadingCtrl: LoadingController,
     public auth: AuthService, private navCtrl: NavController, private afs: AngularFirestore,
     public cart: CartService, private toastController: ToastController, private notify: NotifyService, private toast: ToastController) {
-      // this.localNotifications.on('click');
-      // this.userId = JSON.parse(localStorage.getItem('data')).uid;
-      // this.localNotifications.on('add').subscribe (success=>{
-      //   console.log("nothing");
-      // })
       this.type = JSON.parse(localStorage.getItem('data')).viewType;
       this.unread = JSON.parse(localStorage.getItem('unreaded'));
      }
 
   ngOnInit() {
-  
     this.unread = JSON.parse(localStorage.getItem('unreaded'));
     this.type = JSON.parse(localStorage.getItem('data')).viewType;
     if (this.type == 'login') {
@@ -115,13 +119,6 @@ export class HomePage implements OnInit {
 }
 
   ionViewDidEnter() {
-
-    // this.notify.getToken();
-    // this.platform.ready().then(() => {
-
-      // Get a FCM token
-      console.log("userid",this.userId )
-      
       this.notify.getToken()
 
       // Listen to incoming messages
@@ -130,13 +127,6 @@ export class HomePage implements OnInit {
           if(msg.body){
              this.notifyToast(msg.body)
           }
-         
-          // // show a toast
-          // const toast = toastCtrl.create({
-          //   message: msg.body,
-          //   duration: 3000
-          // });
-          // toast.present();
         })
       )
       .subscribe()
