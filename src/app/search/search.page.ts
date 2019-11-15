@@ -166,7 +166,16 @@ export class SearchPage implements OnInit {
            return 1;
           return 0; //default return value (no sorting)
          });
-         this.allMenuItems=this.menuItems
+         let withImaegs = [];
+         let withoutImages = [];
+         this.menuItems.forEach(element => {
+           if(element.itemImage !== ''){
+             withImaegs.push(element);
+           } else {
+             withoutImages.push(element);
+           }
+         });
+         this.allMenuItems=withImaegs.concat(withoutImages);
       });
     } else {
       this.allMenuItems = [];

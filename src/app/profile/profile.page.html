@@ -29,29 +29,29 @@
             <div class="law-options">
               <!-- Redirect to: https://smartout.de/impressum -->
               <div class="button button-primary-tint" (click)="impressum()">
-                <p>{{ 'USERPROFILE.imprint' | translate }}</p>
+                <p>How to Use</p>
               </div>
               <!-- Redirect to: https://smartout.de/datenschutz -->
               <div class="button button-primary-tint" (click)="datenschutz()">
-                <p>{{ 'USERPROFILE.privacy' | translate }}</p>
+                <p>Privacy Policy/p>
               </div>
               <!-- Redirect to: https://smartout.de/nutzungsbedingungen -->
               <div class="button button-primary-tint" (click)="nutzungsbedingungen()">
-                <p>{{ 'USERPROFILE.termsofuse' | translate }}</p>
+                <p>Terms of Use</p>
               </div>
               <!-- Redirect to: info@smartout.de-->
               <div class="button button-primary-tint" (click)="sendMail()">
                 <p>{{ 'USERPROFILE.contact' | translate }}</p>
               </div>
   
-              <div class="form">
+              <!-- <div class="form">
                 <div class="form-group">
                   <ion-select [(ngModel)]="language" (ionChange)="changeLanguage()" cancelText="{{ 'GENERAL.cancel' | translate }}" okText="{{ 'GENERAL.done' | translate }}" placeholder="{{ 'GENERAL.language' | translate }}">
                     <ion-select-option value="en" selected>English</ion-select-option>
                     <ion-select-option value="de">Deutsch</ion-select-option>
                   </ion-select>
                 </div>
-              </div>
+              </div> -->
               
             </div>
           </div>

@@ -92,51 +92,52 @@ export class ProfilePage implements OnInit {
   }
 
   navigateReceipts(): void {
-    if(this.type == "login") {
-      this.navCtrl.navigateForward('profile/receipts');
-    } else {
-      this.toastNotLoggedIn();
-      this.navCtrl.navigateRoot('/start');
-    }
+    this.toastNotLoggedIn('Receipts are not available yet');
+    // if(this.type == "login") {
+    //   this.navCtrl.navigateForward('profile/receipts');
+    // } else {
+    //   this.toastNotLoggedIn();
+    //   this.navCtrl.navigateRoot('/start');
+    // }
   }
 
   navigateSettings(): void {
     if(this.type == "login") {
       this.navCtrl.navigateForward('profile/settings');
     } else {
-      this.toastNotLoggedIn();
+      this.toastNotLoggedIn('You need to login first');
       this.navCtrl.navigateRoot('/start');
     }
   }
 
   impressum() {
-    const options : InAppBrowserOptions = {
-      zoom : 'no',
+    // const options : InAppBrowserOptions = {
+    //   zoom : 'no',
       
-    }
-    const browser = this.iap.create('https://smartout.de/impressum','_blank',options);
+    // }
+    // const browser = this.iap.create('https://smartout.de/impressum','_blank',options);
   }
   datenschutz() {
-    const options : InAppBrowserOptions = {
-      zoom : 'no'
-    }
-    const browser = this.iap.create('https://smartout.de/datenschutz','_blank',options);
+    // const options : InAppBrowserOptions = {
+    //   zoom : 'no'
+    // }
+    // const browser = this.iap.create('https://smartout.de/datenschutz','_blank',options);
   }
   nutzungsbedingungen() {
-    const options : InAppBrowserOptions = {
-      zoom : 'no'
-    }
-    const browser = this.iap.create('https://smartout.de/nutzungsbedingungen','_blank',options);
+    // const options : InAppBrowserOptions = {
+    //   zoom : 'no'
+    // }
+    // const browser = this.iap.create('https://smartout.de/nutzungsbedingungen','_blank',options);
   }
   sendMail() {
-    var email = "info@smartout.de";
+    var email = "info@houseofmandi.com";
     window.open('mailto:'+email,"_system");
   }
 
   // If user tries to use functionalities without login 
-  async toastNotLoggedIn() {
+  async toastNotLoggedIn(message) {
     const toast = await this.toastController.create({
-      message: this.translate.instant('ALERT.notLoggedInMessage'),
+      message: message,
       duration: 4000,
       showCloseButton: false,
       position: 'top'
