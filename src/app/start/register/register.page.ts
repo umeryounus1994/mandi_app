@@ -24,7 +24,9 @@ export class RegisterPage implements OnInit {
     password: '',
     gender : '',
     dob : '',
-    status : 'active'
+    status : 'active',
+    phone: '',
+    address: ''
   };
   userData : any;
   constructor(private network: Network, private location: Location, public platform: Platform, private auth : AuthService,
@@ -87,7 +89,8 @@ export class RegisterPage implements OnInit {
     }
     else {
     if(this.register_data.firstname === "" && this.register_data.lastname === "" && this.register_data.gender === undefined 
-    && this.register_data.dob === "" && this.register_data.email === "" && this.register_data.password === "") {
+    && this.register_data.dob === "" && this.register_data.email === "" && this.register_data.password === "" &&
+    this.register_data.phone === "" && this.register_data.address === "") {
       this.showDialogue('Signup','Please Fill all fields');
     } else {
       //this.api.addUser("a","b");
@@ -103,7 +106,9 @@ export class RegisterPage implements OnInit {
           lastname: this.register_data.lastname,
           gender : this.register_data.gender,
           dob : this.register_data.dob,
-          status : "active"
+          status : "active",
+          address: this.register_data.address,
+          phone: this.register_data.phone
         };
 
         this.api.addUser(data.userId,data)

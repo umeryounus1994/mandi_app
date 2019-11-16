@@ -64,6 +64,7 @@ export class SearchPage implements OnInit {
     this.router.navigate(['location',barId]);
   }
   loadMenuItems(category){
+    if(category !== 'Takeaway'){
     this.afs.collection('categories',ref=>ref.where("categoryName","==",category)).snapshotChanges()
     .pipe(map((actions: any) => {
       return actions.map(a => {
@@ -81,18 +82,57 @@ export class SearchPage implements OnInit {
 
       }
     });
+  } else {
+    this.loadAllItem();
+  }
 
+  }
+  loadAllItem(){
+    this.afs.collection('menuitems').snapshotChanges().pipe(map((actions: any) => {
+      return actions.map(a => {
+        const data = a.payload.doc.data()
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    })).subscribe(data => {
+      this.menuItems = [];
+      this.menuItems = data;
+      this.menuItems.sort(function(a, b){
+        var nameA=a.itemName.toLowerCase(), nameB=b.itemName.toLowerCase();
+        if (nameA < nameB) //sort string ascending
+         return -1;
+        if (nameA > nameB)
+         return 1;
+        return 0; //default return value (no sorting)
+       });
+       let withImaegs = [];
+       let withoutImages = [];
+       this.menuItems.forEach(element => {
+         if(element.itemImage !== ''){
+           withImaegs.push(element);
+         } else {
+           withoutImages.push(element);
+         }
+       });
+       this.allMenuItems=withImaegs.concat(withoutImages);
+    });
   }
 
   addToCart(product) {
     if (this.type == "login") {
-    let cartData = {
+    let cartData: any = {
       itemId: product.itemId,
       name: product.itemName,
       categoryName : product.categoryName,
       page: product.page,
       price: product.price,
-      userId: this.userId
+      userId: this.userId,
+      image: product.itemImage
+    }
+    if(this.categoryName === 'Takeaway'){
+      cartData.orderType = 'takeaway';
+    } else {
+      cartData.orderType = 'normal';
     }
     this.cart.addToCart(cartData).then((val) => {
       this.toastMenuItem(this.translate.instant('ALERT.addToCartMessage'));

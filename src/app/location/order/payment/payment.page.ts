@@ -42,6 +42,7 @@ export class PaymentPage implements OnInit {
   comments=""
   foundElement : any;
   tableNo='';
+  categoryName='';
   constructor(private network1: Network, private router: Router, private location: Location, private nfc: NFC, private ndef: Ndef, private route: ActivatedRoute,
     private auth: AuthService, private plt: Platform, private api: ApiService, private cart: CartService,
     private dev: Device, public loadingCtrl: LoadingController, public alertCtrl: AlertController, private toastController: ToastController,
@@ -51,6 +52,9 @@ export class PaymentPage implements OnInit {
     this.route.params.subscribe(params => {
       this.CART_KEY = params['id'];
     });
+    if(localStorage.getItem('category') !== undefined || localStorage.getItem('category') !== null) {
+      this.categoryName = JSON.parse(localStorage.getItem('category')).category;
+    }
     this.userId = JSON.parse(localStorage.getItem("data")).uid;
     this.username = JSON.parse(localStorage.getItem("uname")).name;
     this.price = this.auth.price.toFixed(2)
@@ -139,8 +143,8 @@ export class PaymentPage implements OnInit {
   d;
   hours;
   minutessss;
-  userOrders;
-  orderDAta;
+  userOrders: any;
+  orderDAta:any;
 
   ReadTag() {
 
@@ -197,6 +201,13 @@ export class PaymentPage implements OnInit {
       comments : this.comments,
       tableNo: this.tableNo
     }
+    if(this.categoryName === 'Takeaway'){
+      this.userOrders.orderType = 'takeaway';
+      this.orderDAta.orderType = 'takeaway';
+    } else {
+      this.userOrders.orderType = 'normal';
+      this.orderDAta.orderType = 'normal';
+    }
 
         // NFC Scan has started loading
         this.presentLoading();
@@ -244,7 +255,8 @@ export class PaymentPage implements OnInit {
                             orderId: this.orderDAta.orderId,
                             status: "pending",
                             page : sh.page,
-                            orderDetailId: this.makeid()
+                            orderDetailId: this.makeid(),
+                            image: sh.image
                           }
                           if (this.i < val.length) {
                             this.api.createOrderDetails(d.orderDetailId, d).then(added => {
@@ -283,7 +295,8 @@ export class PaymentPage implements OnInit {
                             status: "pending",
                             item_price: sh.price,
                             page : sh.page,
-                            orderDetailId: this.makeid()
+                            orderDetailId: this.makeid(),
+                            image: sh.image
                           }
                           if (this.i < val.length) {
                             this.api.createOrderDetails(d.orderDetailId, d).then(added => {
@@ -319,7 +332,8 @@ export class PaymentPage implements OnInit {
                             status: "pending",
                             item_price: sh.price,
                             page : sh.page,
-                            orderDetailId: this.makeid()
+                            orderDetailId: this.makeid(),
+                            image: sh.image
                           }
                           if (this.i < val.length) {
                             this.api.createOrderDetails(d.orderDetailId, d).then(added => {
@@ -354,7 +368,8 @@ export class PaymentPage implements OnInit {
                           status: "pending",
                           item_price: sh.price,
                           page : sh.page,
-                          orderDetailId: this.makeid()
+                          orderDetailId: this.makeid(),
+                          image: sh.image
                         }
                         if (this.i < val.length) {
                           this.api.createOrderDetails(d.orderDetailId, d).then(added => {

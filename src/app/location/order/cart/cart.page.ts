@@ -7,6 +7,8 @@ import { AuthService } from '../../../providers/auth.service';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { ApiService } from '../../../providers/api.service';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { map } from 'rxjs/operators';
 declare var $ :any;
 @Component({
   selector: 'app-cart',
@@ -33,7 +35,7 @@ export class CartPage implements OnInit {
   
   constructor(private api: ApiService,private network: Network, private location: Location, public cart: CartService, private route: ActivatedRoute,
     private loadingCtrl: LoadingController, private auth : AuthService,
-    private toastController: ToastController,
+    private toastController: ToastController,private afs: AngularFirestore,
     private navCtrl: NavController, private vibration: Vibration) {
     this.route.params.subscribe(params => {
       this.CART_KEY = params['id'];
@@ -100,8 +102,25 @@ export class CartPage implements OnInit {
     if(this.tableNo === ''){
       this.toastMenuItem('Select Table');
     }
-    this.auth.saveTable(this.tableNo);
-    this.navCtrl.navigateForward(["location/order/payment",this.CART_KEY]);
+    this.afs.collection('userOrders', ref=>ref.where('tableNo','==',this.tableNo).where('status','==','pending')).snapshotChanges()
+    .pipe(
+      map((actions: any) => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    )
+    .subscribe(data => {
+     if(data.length > 0){
+      this.toastMenuItem('Select Another Table. This table has ongoing order right now');
+     } else {
+      this.auth.saveTable(this.tableNo);
+      this.navCtrl.navigateForward(["location/order/payment",this.CART_KEY]);
+     }
+    });
+
   }
 
   ngOnInit() {

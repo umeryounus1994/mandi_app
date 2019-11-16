@@ -88,6 +88,11 @@ export class HomePage implements OnInit {
       categoryName : 'Catering',
       image: 'assets/images/catering.jpg'
     },
+    {
+      cName: 'Takeaway',
+      categoryName : 'Takeaway',
+      image: 'assets/images/takeaway.jpg'
+    },
     
   ]
 
